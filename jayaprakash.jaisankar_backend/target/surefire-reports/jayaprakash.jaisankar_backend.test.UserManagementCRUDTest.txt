@@ -1,0 +1,45 @@
+-------------------------------------------------------------------------------
+Test set: jayaprakash.jaisankar_backend.test.UserManagementCRUDTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserValidUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.UserManagementCRUD$UserManagementService.registerUser(jayaprakash.jaisankar_backend.UserManagementCRUD$User)" because "this.userManagementService" is null
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserValidUser(UserManagementCRUDTest.java:26)
+
+jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserNullUser()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <jayaprakash.jaisankar_backend.UserManagementCRUD.InvalidUserException> but was: <java.lang.NullPointerException>
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:65)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:37)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3007)
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserNullUser(UserManagementCRUDTest.java:45)
+Caused by: java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.UserManagementCRUD$UserManagementService.registerUser(jayaprakash.jaisankar_backend.UserManagementCRUD$User)" because "this.userManagementService" is null
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.lambda$1(UserManagementCRUDTest.java:45)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:55)
+	... 21 more
+
+jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserEmptyFields()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <jayaprakash.jaisankar_backend.UserManagementCRUD.InvalidUserException> but was: <java.lang.NullPointerException>
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:65)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:37)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3007)
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserEmptyFields(UserManagementCRUDTest.java:52)
+Caused by: java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.UserManagementCRUD$UserManagementService.registerUser(jayaprakash.jaisankar_backend.UserManagementCRUD$User)" because "this.userManagementService" is null
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.lambda$2(UserManagementCRUDTest.java:52)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:55)
+	... 21 more
+
+jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserNullFields()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <jayaprakash.jaisankar_backend.UserManagementCRUD.InvalidUserException> but was: <java.lang.NullPointerException>
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:65)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:37)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3007)
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserNullFields(UserManagementCRUDTest.java:59)
+Caused by: java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.UserManagementCRUD$UserManagementService.registerUser(jayaprakash.jaisankar_backend.UserManagementCRUD$User)" because "this.userManagementService" is null
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.lambda$3(UserManagementCRUDTest.java:59)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:55)
+	... 21 more
+
+jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserDuplicateEmail()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.UserManagementCRUD$UserManagementService.registerUser(jayaprakash.jaisankar_backend.UserManagementCRUD$User)" because "this.userManagementService" is null
+	at jayaprakash.jaisankar_backend.test.UserManagementCRUDTest.testRegisterUserDuplicateEmail(UserManagementCRUDTest.java:36)
+

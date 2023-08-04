@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: jayaprakash.jaisankar_backend.test.CRUDTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+jayaprakash.jaisankar_backend.test.CRUDTest.testRegister()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.App.register(jayaprakash.jaisankar_backend.User)" because "this.app" is null
+	at jayaprakash.jaisankar_backend.test.CRUDTest.testRegister(CRUDTest.java:47)
+
+jayaprakash.jaisankar_backend.test.CRUDTest.testUpdateUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.App.register(jayaprakash.jaisankar_backend.User)" because "this.app" is null
+	at jayaprakash.jaisankar_backend.test.CRUDTest.testUpdateUser(CRUDTest.java:59)
+
+jayaprakash.jaisankar_backend.test.CRUDTest.testDeleteUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "jayaprakash.jaisankar_backend.App.register(jayaprakash.jaisankar_backend.User)" because "this.app" is null
+	at jayaprakash.jaisankar_backend.test.CRUDTest.testDeleteUser(CRUDTest.java:75)
+
