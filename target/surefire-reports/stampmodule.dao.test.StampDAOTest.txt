@@ -14,6 +14,10 @@ stampmodule.dao.test.StampDAOTest.testDeleteStamp()  Time elapsed: 0 sec  <<< FA
 java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.addStamp(stampmodule.model.Stamp)" because "this.stampDAO" is null
 	at stampmodule.dao.test.StampDAOTest.testDeleteStamp(StampDAOTest.java:89)
 
+stampmodule.dao.test.StampDAOTest.testUpdateStamp()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.addStamp(stampmodule.model.Stamp)" because "this.stampDAO" is null
+	at stampmodule.dao.test.StampDAOTest.testUpdateStamp(StampDAOTest.java:62)
+
 stampmodule.dao.test.StampDAOTest.testGetAllStamps()  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.getAllStamps()" because "this.stampDAO" is null
 	at stampmodule.dao.test.StampDAOTest.testGetAllStamps(StampDAOTest.java:112)
@@ -21,8 +25,4 @@ java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.getAllSt
 stampmodule.dao.test.StampDAOTest.testGetStampByName()  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.addStamp(stampmodule.model.Stamp)" because "this.stampDAO" is null
 	at stampmodule.dao.test.StampDAOTest.testGetStampByName(StampDAOTest.java:41)
-
-stampmodule.dao.test.StampDAOTest.testUpdateStamp()  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.addStamp(stampmodule.model.Stamp)" because "this.stampDAO" is null
-	at stampmodule.dao.test.StampDAOTest.testUpdateStamp(StampDAOTest.java:62)
 

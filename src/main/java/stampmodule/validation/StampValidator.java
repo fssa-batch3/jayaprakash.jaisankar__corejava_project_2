@@ -19,6 +19,9 @@ public class StampValidator {
         if (stamp.getDescription() == null || stamp.getDescription().isEmpty()) {
             return false; // Description cannot be empty
         }
+         if (stamp.getImg() == null || stamp.getImg().isEmpty()) {
+            return false; // Image path cannot be empty
+        }
         
         // Regular expression pattern for stamp name (allowing only letters and spaces)
         String stampNamePattern = "^[a-zA-Z\\s]+$";
@@ -37,7 +40,7 @@ public class StampValidator {
             return false; // Description format is invalid
         }
 
-        // You can add more validation checks for other attributes here
+       
         
         return true;
     }

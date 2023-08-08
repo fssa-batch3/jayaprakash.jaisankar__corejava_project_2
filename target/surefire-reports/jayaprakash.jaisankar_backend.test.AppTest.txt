@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: jayaprakash.jaisankar_backend.test.AppTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.827 sec <<< FAILURE!
-jayaprakash.jaisankar_backend.test.AppTest.testLogin()  Time elapsed: 1.825 sec  <<< FAILURE!
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 2.315 sec <<< FAILURE!
+jayaprakash.jaisankar_backend.test.AppTest.testLogin()  Time elapsed: 2.313 sec  <<< FAILURE!
 java.lang.NoClassDefFoundError: org/junit/Assert
 	at jayaprakash.jaisankar_backend.test.AppTest.testLogin(AppTest.java:16)
 Caused by: java.lang.ClassNotFoundException: org.junit.Assert
