@@ -32,6 +32,8 @@ public class TestStampDAO {
         stamp.setStampName("100stamp");
         stamp.setImg("100stamp.jpg");
         stamp.setRupees(10);
+        
+        
         stamp.setDescription("A 100stamp");
 
         assertTrue(stampDAO.addStamp(stamp));

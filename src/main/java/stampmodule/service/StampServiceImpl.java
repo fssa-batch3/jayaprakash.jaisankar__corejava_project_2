@@ -1,8 +1,6 @@
 package stampmodule.service;
 
 
-import stampmodule.dao.StampDao;
-
 import com.google.protobuf.ServiceException;
 
 import stampmodule.dao.DaoException;
@@ -18,43 +16,27 @@ public class StampServiceImpl implements StampService {
     }
 
     public boolean addStamp(Stamp stamp) throws ServiceException {
-        try {
-            if (StampValidator.validateStamp(stamp)) {
-                return stampDao.addStamp(stamp);
-            } else {
-                throw new ServiceException("Invalid stamp attributes");
-            }
-        } catch (DaoException e) {
-            throw new ServiceException("Error while adding stamp", e);
-        }
+        if (StampValidator.validateStamp(stamp)) {
+		    return ((StampServiceImpl) stampDao).addStamp(stamp);
+		} else {
+		    throw new ServiceException("Invalid stamp attributes");
+		}
     }
 
-    public Stamp getStampByName(String name) throws ServiceException {
-        try {
-            return stampDao.getStampByName(name);
-        } catch (DaoException e) {
-            throw new ServiceException("Error while fetching stamp", e);
-        }
+    public Stamp getStampByName(String name) throws ServiceException, DaoException {
+        return ((StampServiceImpl) stampDao).getStampByName(name);
     }
 
     @Override
     public boolean updateStamp(Stamp stamp) throws ServiceException {
-        try {
-            if (StampValidator.validateStamp(stamp)) {
-                return stampDao.updateStamp(stamp);
-            } else {
-                throw new ServiceException("Invalid stamp attributes");
-            }
-        } catch (DaoException e) {
-            throw new ServiceException("Error while updating stamp", e);
-        }
+        if (StampValidator.validateStamp(stamp)) {
+		    return ((StampServiceImpl) stampDao).updateStamp(stamp);
+		} else {
+		    throw new ServiceException("Invalid stamp attributes");
+		}
     }
 
     public boolean deleteStamp(String name) throws ServiceException {
-        try {
-            return stampDao.deleteStamp(name);
-        } catch (DaoException e) {
-            throw new ServiceException("Error while deleting stamp", e);
-        }
+        return ((StampServiceImpl) stampDao).deleteStamp(name);
     }
 }
