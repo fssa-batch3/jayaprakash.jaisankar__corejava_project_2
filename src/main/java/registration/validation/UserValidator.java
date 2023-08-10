@@ -14,7 +14,7 @@ public class UserValidator {
 	}
 
 	public static boolean validatePassword(String password) {
-		// Validate password using a regex pattern for a strong password
+		// Validate password using regex pattern for a strong password
 		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
 		return Pattern.matches(regex, password);
 	}
@@ -22,7 +22,7 @@ public class UserValidator {
 	public static boolean validateUser(User user) throws InvalidUserException {
 		// TODO Auto-generated method stub
 		if(user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
-			return true;
+			return true;a 
 		} else {
 			throw new InvalidUserException("user details not valid");
 		}

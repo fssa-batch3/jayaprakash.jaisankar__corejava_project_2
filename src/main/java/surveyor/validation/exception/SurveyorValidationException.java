@@ -10,3 +10,4 @@ public class SurveyorValidationException extends Exception {
         super(message, cause);
     }
 }
+
