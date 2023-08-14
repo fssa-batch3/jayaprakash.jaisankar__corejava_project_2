@@ -19,7 +19,6 @@ public class TestStampUpdate {
     }
 
     @Test
-        updatedStamp.setImg("new_image.jpg");
     public void testUpdateStamp() {
         // Create a sample stamp to update
         Stamp originalStamp = new Stamp();

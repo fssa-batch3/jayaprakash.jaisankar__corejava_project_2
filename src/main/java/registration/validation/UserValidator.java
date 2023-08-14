@@ -22,7 +22,7 @@ public class UserValidator {
 	public static boolean validateUser(User user) throws InvalidUserException {
 		// TODO Auto-generated method stub
 		if(user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
-			return true;a 
+			return true;
 		} else {
 			throw new InvalidUserException("user details not valid");
 		}
