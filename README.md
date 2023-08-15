@@ -1,11 +1,5 @@
 # sec_a_jayaprakash.jaisankar__corejava_project_2
 
-
-
-
-
-
-
 # Core Java Project Database README
 
 This document provides an overview of the database structure and the SQL queries used in the Core Java project.
