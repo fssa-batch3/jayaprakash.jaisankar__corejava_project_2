@@ -53,8 +53,7 @@ The purpose of the "Project and Task Management Website" is to provide a central
 
 ## User Persona
 
-- Librarian
-- Members
+- All 
 
 ## JavaDoc
 
