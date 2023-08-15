@@ -177,7 +177,7 @@ class TestUserValidator {
 
     @Test
     void testInvalidProfilePic_Empty() {
-        String emptyProfilePic = "";
+        String emptyProfilePic = ""; 
         assertThrows(ValidationException.class, () -> userValidator.validateProfilePic(emptyProfilePic));
     }
 

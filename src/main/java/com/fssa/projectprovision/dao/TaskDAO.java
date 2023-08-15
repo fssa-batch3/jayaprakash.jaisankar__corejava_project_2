@@ -48,7 +48,7 @@ public class TaskDAO {
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query);
              ResultSet rs = pst.executeQuery()) {
-
+ 
             while (rs.next()) {
                 Task task = buildTaskFromResultSet(rs);
                 taskList.add(task);

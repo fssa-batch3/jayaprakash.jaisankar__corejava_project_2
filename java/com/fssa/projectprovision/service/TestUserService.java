@@ -26,8 +26,8 @@ class TestUserService {
     public void setUp() {
         userService = new UserService();
         user = new User();
-        user.setName("Jayaprakash");
-        user.setEmail("jayaprakashsachin@example.com");
+        user.setName("Jayaprakashj");
+        user.setEmail("jayaprakashsachink@example.com");
         user.setMobileNumber("1234567890");
         user.setDateOfBirth(Date.valueOf(LocalDate.parse("2002-06-28")));
         user.setAddress("Sample Address");
