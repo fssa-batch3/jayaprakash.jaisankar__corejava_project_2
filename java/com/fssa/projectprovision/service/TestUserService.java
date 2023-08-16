@@ -1,22 +1,17 @@
 package com.fssa.projectprovision.service;
 
+import com.fssa.projectprovision.dao.UserDAO;
+import com.fssa.projectprovision.exception.DAOException;
+import com.fssa.projectprovision.exception.ServiceException;
+import com.fssa.projectprovision.model.User;
+import org.junit.jupiter.api.*;
 
-import com.fssa.projectprovision.dao.*;
-import com.fssa.projectprovision.exception.*;
-import com.fssa.projectprovision.model.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestMethodOrder(OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestUserService {
 
     private UserService userService;
@@ -26,21 +21,19 @@ class TestUserService {
     public void setUp() {
         userService = new UserService();
         user = new User();
-        user.setName("Jayaprakashj");
-        user.setEmail("jayaprakashsachink@example.com");
+        user.setName("Jayaprakash");
+        user.setEmail("jayaprakash@example.com");
         user.setMobileNumber("1234567890");
-        user.setDateOfBirth(Date.valueOf(LocalDate.parse("2002-06-28")));
-        user.setAddress("Sample Address");
-        user.setAboutMe("About me");
         user.setPassword("password123");
         user.setGender("M");
+        user.setDateOfBirth(LocalDate.parse("2002-06-28"));
         user.setProfilePic("http://www.example.com/index.html");
         user.setMyTodos("[]");
         user.setUserId(1L);
     }
 
     @Order(1)
-    @Test 
+    @Test
     void testValidRegisterUser() {
         try {
             User existingUser = UserDAO.getUserByEmail(user.getEmail());
@@ -56,10 +49,10 @@ class TestUserService {
     @Order(2)
     @Test
     void testInvalidRegisterUser() {
-        User nonExistentUser = new User();
-        nonExistentUser.setEmail("kishor@example.com");
-        nonExistentUser.setPassword("invalid password");
-        assertThrows(ServiceException.class, () -> userService.registerUser(nonExistentUser));
+        User existingUser = new User();
+        existingUser.setEmail("jayaprakash@example.com");
+        existingUser.setPassword("invalid password");
+        assertThrows(ServiceException.class, () -> userService.registerUser(existingUser));
     }
 
     @Test
@@ -93,14 +86,14 @@ class TestUserService {
             assertFalse(users.isEmpty());
         } catch (ServiceException e) {
             fail("Should not throw ServiceException");
-        }
+        } 
     }
 
     @Test
     @Order(6)
     void testValidUpdateUser() {
         try {
-            user.setName("Vasanthapriyan");
+            user.setName("Updated Name");
             User updatedUser = userService.updateUser(user);
             assertNotEquals(user, updatedUser);
         } catch (ServiceException e) {

@@ -5,7 +5,6 @@ import com.fssa.projectprovision.exception.*;
 import com.fssa.projectprovision.model.*;
 import com.fssa.projectprovision.validation.*;
 
-
 import java.util.List;
 
 public class UserService {
@@ -20,15 +19,19 @@ public class UserService {
             if (existingUser != null && existingUser.isActive()) {
                 throw new ServiceException("Email id " + user.getEmail() + " is already registered");
             }
+            
             if (UserDAO.createUser(user)) {
                 return "Registration Successful";
             } else {
-                return "Registration Failed";
+                throw new ServiceException("Registration Failed");
             }
-        } catch (ValidationException | DAOException e) {
+        } catch (ValidationException e) {
             throw new ServiceException("Invalid User", e);
+        } catch (DAOException e) {
+            throw new ServiceException("Database Error", e); // Adjusted error message
         }
     }
+
 
     public User loginUser(User user) throws ServiceException {
         try {
@@ -44,8 +47,11 @@ public class UserService {
             } else {
                 throw new ServiceException("User Not Found");
             }
-        } catch (ValidationException | DAOException e) {
+        } catch (ValidationException e) {
             throw new ServiceException(e);
+        }
+        catch (DAOException e) {
+            throw new ServiceException("Database Error", e); // Adjusted error message
         }
     }
 

@@ -38,7 +38,7 @@ public class TestMilestoneService {
             e.printStackTrace();
             fail("Should not throw ServiceException");
         }
-    }
+    } 
 
     @Order(2)
     @Test

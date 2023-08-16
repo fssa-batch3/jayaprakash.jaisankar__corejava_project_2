@@ -146,5 +146,10 @@ public class User {
 
 		
 	}
+
+	public void setActive(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
