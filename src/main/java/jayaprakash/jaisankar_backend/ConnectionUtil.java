@@ -1,4 +1,4 @@
-package Connection;
+package jayaprakash.jaisankar_backend;
 
 import java.sql.*;
 
