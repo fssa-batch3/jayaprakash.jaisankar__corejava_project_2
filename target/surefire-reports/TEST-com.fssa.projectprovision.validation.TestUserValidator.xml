@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="TestRegisterFeature.TestValidateEmail" time="0" errors="0" skipped="0">
+<testsuite tests="0" failures="0" name="com.fssa.projectprovision.validation.TestUserValidator" time="0" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -61,8 +61,4 @@
     <property name="m2e.build.project.data.socket.port" value="56500"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="TestRegisterFeature.TestValidateEmail" name="TestRegisterFeature.TestValidateEmail.testInvalidEmailWithoutAtSymbol" time="0"/>
-  <testcase classname="TestRegisterFeature.TestValidateEmail" name="TestRegisterFeature.TestValidateEmail.testInvalidEmailWithoutDomain" time="0"/>
-  <testcase classname="TestRegisterFeature.TestValidateEmail" name="TestRegisterFeature.TestValidateEmail.testInvalidEmailWithSpecialCharacters" time="0"/>
-  <testcase classname="TestRegisterFeature.TestValidateEmail" name="TestRegisterFeature.TestValidateEmail.testValidEmail" time="0"/>
 </testsuite>

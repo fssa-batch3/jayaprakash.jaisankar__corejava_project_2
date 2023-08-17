@@ -16,20 +16,6 @@ public class TestUserValidator {
 
     private final UserValidator userValidator = new UserValidator();
 
-//    @Test
-//    void testValidId() {
-//        int validId = 123;
-//       
-//            assertTrue(userValidator.validateId(validId));
-//        
-//    }
-//
-//    @Test
-//    void testInvalidId() {
-//        int invalidId = -1;
-//        assertThrows(ValidationException.class, () -> userValidator.validateId(invalidId));
-//    }
-
     @Test
     void testValidName() {
         String validName = "Jayaprakash";
@@ -72,15 +58,14 @@ public class TestUserValidator {
         }
     }
 
-//    @Test
-//   void testInvalidMobileNumber() {
-//        String invalidMobileNumber = "invalid";
-//        assertThrows(ValidationException.class,
-//            () -> userValidator.validateMobileNumber(invalidMobileNumber),
-//            "Expected ValidationException for invalid mobile number"
-//        );
-//    }
-
+    @Test
+    void testInvalidMobileNumber() {
+        String invalidMobileNumber = "";
+         assertThrows(ValidationException.class,
+             () -> userValidator.validateMobileNumber(invalidMobileNumber),
+            "Expected ValidationException for invalid mobile number"
+         );
+     }
 
     @Test
     void testValidDateOfBirth() {
@@ -191,11 +176,6 @@ public class TestUserValidator {
         assertTrue(userValidator.validateMyTodos(validMyTodos));
     }
 
-//    @Test
-//    void testInvalidMyTodos() {
-//        String invalidMyTodos = "invalidJSON";
-//        assertThrows(ValidationException.class, () -> userValidator.validateMyTodos(invalidMyTodos));
-//    }
 
     @Test
     void testValidUserId() throws ValidationException {

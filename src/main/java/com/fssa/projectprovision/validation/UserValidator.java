@@ -131,6 +131,11 @@ public class UserValidator {
         return true;
     }
 
+	public BooleanSupplier validateId(int validId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 
