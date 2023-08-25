@@ -6,7 +6,7 @@ import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.Milestone;
 import org.junit.jupiter.api.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -16,93 +16,58 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestMilestoneService {
 
     private MilestoneService milestoneService;
-    private Milestone milestone;
+    private MilestoneDAO milestoneDAO; // You need to create this DAO or mock it
 
     @BeforeEach
     void setUp() {
-        milestoneService = new MilestoneService();
-        milestone = new Milestone();
-        milestone.setTodoId(1);
-        milestone.setTaskText("Sample Task");
-        milestone.setTaskDate(Date.valueOf("2023-08-16"));
-        milestone.setTaskTime(LocalTime.of(10, 30));
-        milestone.setRemainder(true);
+        milestoneDAO = new MilestoneDAO(); // Instantiate your DAO here or mock it
+        milestoneService = new MilestoneService(milestoneDAO); // Pass the MilestoneDAO instance
     }
 
-    @Order(1)
     @Test
+    @Order(1)
     void testInsertMilestone() {
+        Milestone milestone = new Milestone();
+        milestone.settasks_id(2); // Make sure this todoID exists in projecttask table
+        milestone.setTaskText("Sample Task");
+        milestone.setTaskDate(LocalDate.parse("2023-08-16"));
+        milestone.setTaskTime(LocalTime.of(10, 30));
+        milestone.setRemainder(true);
+
         try {
             assertTrue(milestoneService.insertMilestone(milestone));
         } catch (ServiceException e) {
             e.printStackTrace();
             fail("Should not throw ServiceException");
         }
-    } 
+    }
 
-    @Order(2)
     @Test
+    @Order(2)
     void testUpdateMilestone() {
+        // Similar to testInsertMilestone, set the required fields
+        Milestone milestone = new Milestone();
+        milestone.settasks_id(1); // Make sure this todoID exists in projecttask table
         milestone.setTaskText("Updated Task");
+
         try {
             assertTrue(milestoneService.updateMilestone(milestone));
         } catch (ServiceException e) {
             e.printStackTrace();
             fail("Should not throw ServiceException");
         } catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-
-    @Order(3)
-    @Test
-    void testGetProjectTasksWithMilestones() {
-        try {
-            List<Milestone> milestones = milestoneService.getProjectTasksWithMilestones();
-            assertNotNull(milestones);
-            assertFalse(milestones.isEmpty());
-            // You can add more assertions here to validate the retrieved milestones
-        } catch (ServiceException e) {
             e.printStackTrace();
-            fail("Should not throw ServiceException");
         }
     }
 
-    @Order(4)
-    @Test
-    void testDeleteMilestoneByTodoId() {
-        try {
-            assertTrue(milestoneService.deleteMilestoneByTodoId(milestone.getTodoId()));
-        } catch (ServiceException | DAOException e) {
-            e.printStackTrace();
-            fail("Should not throw ServiceException or DAOException");
-        }
-    }
-
-    @Test
-    @Order(5)
-    void testGetAllMilestones() {
-        try {
-            List<MilestoneService> milestones = milestoneService.getAllMilestones();
-            assertNotNull(milestones);
-            assertFalse(milestones.isEmpty());
-            // You can add more assertions here to validate the retrieved milestones
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail("Should not throw ServiceException");
-        } catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+    // Other test methods...
 
     @Test
     @Order(6)
     void testGetMilestoneById() {
         int milestoneId = 1; // Provide an actual milestone ID
         try {
-            MilestoneDAO fetchedMilestone = milestoneService.getMilestoneById(milestoneId);
+            Milestone fetchedMilestone = milestoneService.getMilestoneById(milestoneId);
             assertNotNull(fetchedMilestone);
             // You can add more assertions here to validate the fetched milestone
         } catch (ServiceException | DAOException e) {

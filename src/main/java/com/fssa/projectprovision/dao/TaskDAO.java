@@ -5,6 +5,7 @@ import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,9 +17,8 @@ public class TaskDAO {
     public TaskDAO() {
     }
 
-    public static boolean createTask(Task task) throws DAOException {
-        String query = "INSERT INTO tasks (taskname, taskdetails, taskcategory, taskdue, taskassignee, taskstatus, " +
-                "projectname, taskpriority, tasktags, todoID) " +
+    public boolean createTask(Task task) throws DAOException {
+        String query = "INSERT INTO tasks (taskname, taskdetails, taskcategory, taskdue, taskassignee, taskstatus,projectname, taskpriority, tasktags, todoID) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
@@ -26,7 +26,7 @@ public class TaskDAO {
             pst.setString(1, task.getTaskName());
             pst.setString(2, task.getTaskDetails());
             pst.setString(3, task.getTaskCategory());
-            pst.setDate(4, task.getTaskDue());
+            pst.setDate(4, Date.valueOf(task.getTaskDue()));
             pst.setString(5, task.getTaskAssignee());
             pst.setString(6, task.getTaskStatus());
             pst.setString(7, task.getProjectName());
@@ -87,7 +87,7 @@ public class TaskDAO {
         task.setTaskName(rs.getString("taskname"));
         task.setTaskDetails(rs.getString("taskdetails"));
         task.setTaskCategory(rs.getString("taskcategory"));
-        task.setTaskDue(rs.getDate("taskdue"));
+        task.setTaskDue(rs.getDate("taskdue").toLocalDate());
         task.setTaskAssignee(rs.getString("taskassignee"));
         task.setTaskStatus(rs.getString("taskstatus"));
         task.setProjectName(rs.getString("projectname"));
@@ -110,7 +110,7 @@ public class TaskDAO {
             pst.setString(1, task.getTaskName());
             pst.setString(2, task.getTaskDetails());
             pst.setString(3, task.getTaskCategory());
-            pst.setDate(4, task.getTaskDue());
+            pst.setDate(4, Date.valueOf(task.getTaskDue()));
             pst.setString(5, task.getTaskAssignee());
             pst.setString(6, task.getTaskStatus());
             pst.setString(7, task.getProjectName());

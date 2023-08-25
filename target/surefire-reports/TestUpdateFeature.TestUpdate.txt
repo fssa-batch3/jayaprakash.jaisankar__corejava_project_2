@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: TestUpdateFeature.TestUpdate
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec <<< FAILURE!
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 TestUpdateFeature.TestUpdate.testUpdateUserById_Failure()  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.NoClassDefFoundError: org/junit/Assert
 	at TestUpdateFeature.TestUpdate.testUpdateUserById_Failure(TestUpdate.java:41)
@@ -11,7 +11,7 @@ Caused by: java.lang.ClassNotFoundException: org.junit.Assert
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
 	... 19 more
 
-TestUpdateFeature.TestUpdate.testUpdateUserById_Success()  Time elapsed: 0.011 sec  <<< FAILURE!
+TestUpdateFeature.TestUpdate.testUpdateUserById_Success()  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.NoClassDefFoundError: org/junit/Assert
 	at TestUpdateFeature.TestUpdate.testUpdateUserById_Success(TestUpdate.java:30)
 Caused by: java.lang.ClassNotFoundException: org.junit.Assert

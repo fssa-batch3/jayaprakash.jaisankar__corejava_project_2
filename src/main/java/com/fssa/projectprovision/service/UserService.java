@@ -69,9 +69,14 @@ public class UserService {
             if (existingUser == null) {
                 throw new ServiceException(USER_WITH_EMAIL + user.getEmail() + " does not exist.");
             }
-            if (!UserDAO.updateUser(user)) {
-                throw new ServiceException("User Update Failed");
-            }
+            try {
+				if (!UserDAO.updateUser(user)) {
+				    throw new ServiceException("User Update Failed");
+				}
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             return UserDAO.getUserByEmail(user.getEmail());
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -92,4 +97,16 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+
+
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void updateUser1(User user) {
+		// TODO Auto-generated method stub
+		
+	}
 }

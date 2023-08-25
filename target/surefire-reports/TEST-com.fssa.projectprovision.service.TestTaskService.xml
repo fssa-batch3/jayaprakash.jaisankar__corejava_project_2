@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="com.fssa.projectprovision.validation.TestTaskValidator" time="0.026" errors="0" skipped="0">
+<testsuite tests="0" failures="0" name="com.fssa.projectprovision.service.TestTaskService" time="0" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -60,15 +60,4 @@
     <property name="m2e.build.project.data.socket.port" value="51448"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskName" time="0.022"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidProjectName" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskDetails" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskStatus" time="0.001"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskAssignee" time="0.001"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskPriority" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskCategory" time="0.001"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskTags" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTaskDue" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testValidTask" time="0"/>
-  <testcase classname="com.fssa.projectprovision.validation.TestTaskValidator" name="com.fssa.projectprovision.validation.TestTaskValidator.testInvalidTodoId" time="0.001"/>
 </testsuite>

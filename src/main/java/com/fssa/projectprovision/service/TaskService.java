@@ -11,23 +11,24 @@ import java.util.List;
 
 public class TaskService {
 
+
+    private final TaskDAO taskDAO;
+
     public TaskService(TaskDAO taskDAO) {
-
-	}
-
-	public String createTask(Task task) throws ServiceException {
-        try {
-            TaskValidator.validateTask(task); // Validate task fields before creating
-            boolean result = TaskDAO.createTask(task);
-            if (result) {
-                return "Task Created Successfully";
-            } else {
-                return "Failed to Create Task";
-            }
-        } catch (DAOException | ValidationException e) {
-            throw new ServiceException("Failed to create task", e);
-        }
+        this.taskDAO = taskDAO;
     }
+
+    public boolean createTask(Task task) throws ServiceException {
+    	boolean result = false;
+    	try {
+            TaskValidator.validateTask(task);
+            result = taskDAO.createTask(task);
+        } catch (DAOException | ValidationException e) {
+            throw new ServiceException("Failed to create first task", e);
+        }
+        return result;
+    }
+
 
     public Task getTaskById(int taskId) throws ServiceException {
         try {
@@ -47,8 +48,8 @@ public class TaskService {
 
     public String updateTask(Task task) throws ServiceException {
         try {
-            TaskValidator.validateTask(task); // Validate task fields before updating
-            boolean result = TaskDAO.updateTask(task);
+            TaskValidator.validateTask(task);
+            boolean result = taskDAO.updateTask(task);
             if (result) {
                 return "Task Updated Successfully";
             } else {
@@ -58,7 +59,6 @@ public class TaskService {
             throw new ServiceException("Failed to update task", e);
         }
     }
-
     public String deleteTaskById(int taskId) throws ServiceException {
         try {
             boolean result = TaskDAO.getTaskById(taskId) != null;

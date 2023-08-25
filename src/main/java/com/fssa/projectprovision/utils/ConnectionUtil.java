@@ -1,40 +1,27 @@
 package com.fssa.projectprovision.utils;
 
-
-import io.github.cdimascio.dotenv.Dotenv;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
 
+    private ConnectionUtil() {
+        // Private constructor to prevent instantiation
+    }
 
-	// Private constructor to prevent instantiation
-	private ConnectionUtil() {
-		// Do nothing (empty constructor)
-	}
+    public static Connection getConnection() {
+        final String dbUrl = System.getenv("DB_URL");
+        final String dbUser = System.getenv("DB_USER");
+        final String dbPassword = System.getenv("DB_PASSWORD");
 
-	// Call the database connection
-	public static Connection getConnection() throws SQLException {
-
-		// Database URL and credentials
-		final String dbUrl;
-		final String dbUser;
-		final String dbPassword;
-
-		if (System.getenv("CI") != null) {
-			dbUrl = System.getenv("DB_URL");
-			dbUser = System.getenv("DB_USER");
-			dbPassword = System.getenv("DB_PASSWORD");
-		} else {
-			Dotenv env = Dotenv.load();
-			dbUrl = env.get("DB_URL");
-			dbUser = env.get("DB_USER");
-			dbPassword = env.get("DB_PASSWORD");
-		}
-		return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-	}
-
-
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Database Driver class Not found", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to Connect to Database", e);
+        }
+    }
 }

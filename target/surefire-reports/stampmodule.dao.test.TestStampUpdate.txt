@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: stampmodule.dao.test.TestStampUpdate
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
-stampmodule.dao.test.TestStampUpdate.testUpdateStamp()  Time elapsed: 0.001 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+stampmodule.dao.test.TestStampUpdate.testUpdateStamp()  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.NullPointerException: Cannot invoke "stampmodule.dao.StampDAO.addStamp(stampmodule.model.Stamp)" because "this.stampDAO" is null
 	at stampmodule.dao.test.TestStampUpdate.testUpdateStamp(TestStampUpdate.java:32)
 

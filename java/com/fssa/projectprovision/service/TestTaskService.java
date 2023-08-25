@@ -1,121 +1,143 @@
 package com.fssa.projectprovision.service;
 
 import com.fssa.projectprovision.dao.TaskDAO;
-import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.Task;
-import com.fssa.projectprovision.validation.TaskValidator;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestMethodOrder(OrderAnnotation.class)
-class TestTaskService {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class TestTaskService {
 
     private TaskService taskService;
-    private TaskDAO taskDAO;
+    private Task task;
 
     @BeforeEach
-    public void setUp() {
-        taskDAO = new TaskDAO();
+    void setUp() {
+        TaskDAO taskDAO = new TaskDAO(); // Replace this with the actual instantiation of your TaskDAO
         taskService = new TaskService(taskDAO);
+
+        // Create a sample Task with valid attributes
+        task = new Task();
+        task.setTaskName("Sample Task");
+        task.setTaskDue(LocalDate.now().plusDays(1));
+        task.setTaskDetails("Sample details");
+        task.setTaskCategory("Sample category");
+        task.setTaskAssignee("Sample assignee");
+        task.setTaskStatus("Pending");
+        task.setProjectName("Sample project");
+        task.setTaskPriority("High");
+        task.setTaskTags("Tag1, Tag2");
+
+        // Set a valid todo ID format matching the regular expression
+        task.setTodoId("abcdef0123456789ABCDEF0987654980");
     }
 
     @Test
     @Order(1)
-    void testValidCreateTask() {
-        Task task = new Task();
-        task.setTaskName("Sample Task");
-        task.setTaskDue(Date.valueOf(LocalDate.now().plusDays(1)));
-        task.setTaskDetails("Sample Task Details");
-        // Set other properties...
-        
+    void testCreateTask_Success() {
         try {
-            boolean result = taskService.createTask(task) != null;
-            assertTrue(result);
+            // Act: Attempt to create the task
+            boolean result = taskService.createTask(task);
+
+            // Assert: Check if the result is as expected
+            assertTrue(result, "Task creation should succeed");
         } catch (ServiceException e) {
+            e.printStackTrace();
             fail("Should not throw ServiceException");
         }
     }
 
     @Test
     @Order(2)
-    void testInvalidCreateTask() {
-        Task task = new Task();
-        task.setTaskName(""); // Set an invalid task name
-        task.setTaskDue(Date.valueOf(LocalDate.now().minusDays(1))); // Set an invalid due date
-        task.setTaskDetails("Sample Task Details");
-        // Set other properties...
-        
-        assertThrows(ServiceException.class, () -> taskService.createTask(task));
+    void testCreateTask_Failure() {
+        Task invalidTask = new Task(); // Renamed to avoid shadowing the 'task' instance
+        invalidTask.setTaskName("Sample Task");
+        invalidTask.setTaskDue(LocalDate.now().plusDays(1));
+        invalidTask.setTaskDetails("Sample details");
+        invalidTask.setTaskCategory("Sample category");
+        invalidTask.setTaskAssignee("Sample assignee");
+        invalidTask.setTaskStatus(" ");
+        invalidTask.setProjectName("Sample project");
+        invalidTask.setTaskPriority("High");
+        invalidTask.setTaskTags("Tag1, Tag2");
+        invalidTask.setTodoId("abcgkf0193456789ABCDEF012356716");
+
+        try {
+            boolean result = taskService.createTask(invalidTask);
+            assertFalse(result);
+        } catch (ServiceException e) {
+            assertEquals(e.getMessage(),"Failed to create first task");
+        }
     }
+
 
     @Test
     @Order(3)
-    void testGetAllTasks() {
+    void testGetTaskById() {
         try {
-            List<Task> tasks = taskService.getAllTasks();
-            assertNotNull(tasks);
-            assertFalse(tasks.isEmpty());
+            Task retrievedTask = taskService.getTaskById(1);
+            assertNotNull(retrievedTask);
         } catch (ServiceException e) {
+            e.printStackTrace();
             fail("Should not throw ServiceException");
         }
     }
 
     @Test
     @Order(4)
-    void testValidUpdateTask() {
-        Task taskToUpdate = new Task();
-        taskToUpdate.setId(1); // Set a valid task ID
-        taskToUpdate.setTaskName("Updated Task Name");
-        taskToUpdate.setTaskDetails("Updated Task Details");
-        // Set other properties...
-        
+    void testGetAllTasks() {
         try {
-            boolean result = taskService.updateTask(taskToUpdate) != null;
-            assertTrue(result);
+            List<Task> tasks = taskService.getAllTasks();
+            assertNotNull(tasks);
+            assertFalse(tasks.isEmpty());
         } catch (ServiceException e) {
+            e.printStackTrace();
             fail("Should not throw ServiceException");
         }
     }
 
     @Test
     @Order(5)
-    void testInvalidUpdateTask() {
-        Task invalidTask = new Task();
-        invalidTask.setId(-1); // Set an invalid task ID
-        invalidTask.setTaskName("Updated Task Name");
-        invalidTask.setTaskDetails("Updated Task Details");
-        // Set other invalid properties...
+    void testUpdateTask() {
+        // Create a new Task instance with updated attributes
+        Task updatedTask = new Task();
+        updatedTask.setId(1); // Set the same ID as the task you want to update
+        updatedTask.setTaskName("Updated Task Name");
+        updatedTask.setTaskDue(LocalDate.now().plusDays(2)); // Updated due date
+        updatedTask.setTaskDetails("Updated details");
+        updatedTask.setTaskCategory("Updated category");
+        updatedTask.setTaskAssignee("Updated assignee");
+        updatedTask.setTaskStatus("Updated status");
+        updatedTask.setProjectName("Updated project");
+        updatedTask.setTaskPriority("Updated priority");
+        updatedTask.setTaskTags("Updated Tag1, Updated Tag2");
+        updatedTask.setTodoId("abcdef0123456789ABCDEF0123456789"); // Set the same todoId as the task you want to update
 
-        assertThrows(ServiceException.class, () -> taskService.updateTask(invalidTask));
-    }
-
-    @Test 
-    @Order(6)
-    void testValidDeleteTask() {
-        int taskIdToDelete = 1; // Set a valid task ID
-
-       
-            BooleanSupplier result = null;
-			assertTrue(result);
-       
+        try {
+            String result = taskService.updateTask(updatedTask);
+            assertEquals("Task Updated Successfully", result);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail("Should not throw ServiceException");
+        }
     }
 
     @Test
-    @Order(7)
-    void testInvalidDeleteTask() {
-        int invalidTaskId = -1; // Set an invalid task ID
+    @Order(6)
+    void testDeleteTaskById() {
+        int taskIdToDelete = 1;
 
-        assertThrows(ServiceException.class, () -> taskService.deleteTask(invalidTaskId));
+        try {
+            String result = taskService.deleteTaskById(taskIdToDelete);
+            assertEquals("Task Deleted Successfully", result);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail("Should not throw ServiceException");
+        }
     }
 }

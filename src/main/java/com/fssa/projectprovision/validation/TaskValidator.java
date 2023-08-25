@@ -41,8 +41,8 @@ public class TaskValidator {
         }
     }
 
-    private static void validateTaskDue(Date taskDue) throws ValidationException {
-        if (taskDue == null || taskDue.toLocalDate().isBefore(LocalDate.now())) {
+    private static void validateTaskDue(LocalDate localDate) throws ValidationException {
+        if (localDate == null || localDate.isBefore(LocalDate.now())) {
             throw new ValidationException("Task due date must be in the future");
         }
         // Add more validation checks for task due date

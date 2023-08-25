@@ -7,9 +7,9 @@ import java.time.LocalTime;
 
 public class Milestone {
 
-    private int todoId;
+    private int tasks_id;
     private String taskText;
-    private Date taskDate;
+    private LocalDate taskDate;
     private LocalTime taskTime;
     private boolean isRemainder;
 
@@ -17,20 +17,20 @@ public class Milestone {
         // Default constructor
     }
 
-    public Milestone(int todoId, String taskText, Date taskDate, LocalTime taskTime, boolean isRemainder) {
-        this.todoId = todoId;
+    public Milestone(int todoId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
+        this.tasks_id = tasks_id;
         this.taskText = taskText;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
         this.isRemainder = isRemainder;
     }
 
-    public int getTodoId() {
-        return todoId;
+    public int gettasks_id1() {
+        return tasks_id;
     }
 
-    public void setTodoId(int i) {
-        this.todoId = i;
+    public void setTodoId(int tasks_id) {
+        this.tasks_id = tasks_id;
     }
 
     public String getTaskText() {
@@ -41,12 +41,12 @@ public class Milestone {
         this.taskText = taskText;
     }
 
-    public Date getTaskDate() {
+    public LocalDate getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(Date date) {
-        this.taskDate = date;
+    public void setTaskDate(LocalDate localDate) {
+        this.taskDate = localDate;
     }
 
     public LocalTime getTaskTime() {
@@ -68,7 +68,7 @@ public class Milestone {
     @Override
     public String toString() {
         return "Milestone{" +
-                "todoId='" + todoId + '\'' +
+                "tasks_id='" + tasks_id + '\'' +
                 ", taskText='" + taskText + '\'' +
                 ", taskDate=" + taskDate +
                 ", taskTime=" + taskTime +
@@ -104,6 +104,17 @@ public class Milestone {
 	}
 
 	public void setTaskDate1(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String gettasks_id() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void settasks_id(int int1) {
 		// TODO Auto-generated method stub
 		
 	}

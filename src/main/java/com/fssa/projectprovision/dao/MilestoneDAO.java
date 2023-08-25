@@ -1,10 +1,12 @@
 package com.fssa.projectprovision.dao;
 
 import com.fssa.projectprovision.model.Milestone;
+
 import com.fssa.projectprovision.service.MilestoneService;
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,9 @@ public class MilestoneDAO {
 
     public static List<Milestone> getProjectTasksWithMilestones() {
         List<Milestone> projectTasks = new ArrayList<>();
-        String query = "SELECT pt.*, m.task_text, m.task_date, m.task_time, m.is_remainder " +
-                       "FROM projecttask pt " +
-                       "INNER JOIN milestone m ON pt.todoID = m.todoID";
+        String query = "SELECT pt.*, t.task_text, t.task_date, t.task_time, t.is_remainder"+
+        		"FROM tasks pt"+
+        		"INNER JOIN milestone t ON pt.id= t.tasks_id";
 
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query);
@@ -32,16 +34,17 @@ public class MilestoneDAO {
     }
 
     public static boolean insertMilestone(Milestone milestone) {
-        String query = "INSERT INTO milestone (todoID, task_text, task_date, task_time, is_remainder) " +
+        String query = "INSERT INTO milestone (task_text, task_date, task_time, is_remainder,tasks_id) " +
                        "VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
-            pst.setInt(1, milestone.getTodoId());
-            pst.setString(2, milestone.getTaskText());
-            pst.setDate(3, milestone.getTaskDate());
-            pst.setTime(4, Time.valueOf(milestone.getTaskTime()));
-            pst.setBoolean(5, milestone.isRemainder());
+          
+            pst.setString(1, milestone.getTaskText());
+            pst.setDate(2, Date.valueOf(milestone.getTaskDate()));
+            pst.setTime(3, Time.valueOf(milestone.getTaskTime()));
+            pst.setBoolean(4, milestone.isRemainder());
+            pst.setString(5, milestone.gettasks_id());
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
@@ -52,17 +55,18 @@ public class MilestoneDAO {
         }
     }
 
+
     public static boolean updateMilestone(Milestone milestone) {
         String query = "UPDATE milestone SET task_text = ?, task_date = ?, task_time = ?, is_remainder = ? " +
-                       "WHERE todoID = ?";
+                       "WHERE tasks_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
             pst.setString(1, milestone.getTaskText());
-            pst.setDate(2, milestone.getTaskDate());
+            pst.setDate(2, Date.valueOf(milestone.getTaskDate()));
             pst.setTime(3, Time.valueOf(milestone.getTaskTime()));
             pst.setBoolean(4, milestone.isRemainder());
-            pst.setInt(5, milestone.getTodoId());
+            pst.setString(5, milestone.gettasks_id());
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
@@ -74,7 +78,7 @@ public class MilestoneDAO {
     }
 
     public static boolean deleteMilestoneByTodoId(int todoId) {
-        String query = "DELETE FROM milestone WHERE todoID = ?";
+        String query = "DELETE FROM milestone WHERE tasks_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
@@ -89,17 +93,17 @@ public class MilestoneDAO {
         }
     }
 
-    // Add more methods as needed
 
     private static Milestone buildMilestoneFromResultSet(ResultSet rs) throws SQLException {
         Milestone milestone = new Milestone();
-        milestone.setTodoId(rs.getInt("id"));
+      
         milestone.setUserId(rs.getInt("user_id"));
         milestone.setTaskText(rs.getString("taskname"));
         milestone.setTaskDetails(rs.getString("taskdetails"));
-        milestone.setTaskDate(rs.getDate("task_date"));
+        milestone.setTaskDate(rs.getDate("task_date").toLocalDate());
         milestone.setTaskTime(rs.getTime("task_time").toLocalTime());
         milestone.setRemainder(rs.getBoolean("is_remainder"));
+        milestone.settasks_id(rs.getInt("tasks_id"));
         return milestone;
     }
 
@@ -111,15 +115,38 @@ public class MilestoneDAO {
 
 	
 
-	public List<MilestoneService> getAllMilestones() {
-		// TODO Auto-generated method stub
+	public List<Milestone> getAllMilestones() {
 		return null;
 	}
 
-	public MilestoneDAO getMilestoneById(int id) {
-		// TODO Auto-generated method stub
+	public Milestone getMilestoneById(int id) {
 		return null;
 	}
 
-    // Add more methods as needed
+	public void setTodoId(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTaskText(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTaskDate(LocalDate now) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTaskTime(LocalTime now) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setRemainder(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    
 }
