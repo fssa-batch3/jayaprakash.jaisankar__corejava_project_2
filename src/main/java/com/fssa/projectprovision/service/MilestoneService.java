@@ -27,9 +27,7 @@ public class MilestoneService {
         return milestoneDAO.deleteMilestoneByTodoId(todoId);
     }
 
-    public Milestone getMilestoneById(int id) throws ServiceException, DAOException {
-        return milestoneDAO.getMilestoneById(id);
-    }
+
 
     public List<Milestone> getAllMilestones() throws ServiceException, DAOException {
         return milestoneDAO.getAllMilestones();
@@ -40,4 +38,10 @@ public class MilestoneService {
     public void setMilestoneDAO(MilestoneDAO milestoneDAO) {
         this.milestoneDAO = milestoneDAO;
     }
+
+
+	public Milestone getMilestoneById(int milestoneId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

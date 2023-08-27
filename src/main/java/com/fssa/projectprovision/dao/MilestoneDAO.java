@@ -33,7 +33,7 @@ public class MilestoneDAO {
         return projectTasks;
     }
 
-    public static boolean insertMilestone(Milestone milestone) {
+    public boolean insertMilestone(Milestone milestone) {
         String query = "INSERT INTO milestone (task_text, task_date, task_time, is_remainder,tasks_id) " +
                        "VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -56,7 +56,7 @@ public class MilestoneDAO {
     }
 
 
-    public static boolean updateMilestone(Milestone milestone) {
+    public boolean updateMilestone(Milestone milestone) {
         String query = "UPDATE milestone SET task_text = ?, task_date = ?, task_time = ?, is_remainder = ? " +
                        "WHERE tasks_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -77,7 +77,7 @@ public class MilestoneDAO {
         }
     }
 
-    public static boolean deleteMilestoneByTodoId(int todoId) {
+    public boolean deleteMilestoneByTodoId(int todoId) {
         String query = "DELETE FROM milestone WHERE tasks_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
