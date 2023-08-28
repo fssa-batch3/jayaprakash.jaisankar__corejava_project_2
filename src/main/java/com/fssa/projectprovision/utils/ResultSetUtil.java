@@ -9,8 +9,35 @@ import com.fssa.projectprovision.model.Milestone;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 
+ * 
+ *  A utility class for building model objects from ResultSet data.
+ * This class provides methods to construct User, Task, and Milestone objects from ResultSet rows.
+ * 
+ * 
+ * Usage:
+ * ResultSet resultSet = ...; // Get a ResultSet from database query
+ * User user = ResultSetUtil.buildUserFromResultSet(resultSet);
+ * Task task = ResultSetUtil.buildTaskFromResultSet(resultSet);
+ * Milestone milestone = ResultSetUtil.buildMilestoneFromResultSet(resultSet);
+ * // Use the constructed objects as needed
+ * 
+ * 
+ * @author JayaprakashJaisankar
+ *
+ */
 public class ResultSetUtil {
 
+	
+	 /**
+     * Builds a User object from the data in the ResultSet.
+     * 
+     * @param rs The ResultSet containing user data.
+     * @return A User object constructed from the ResultSet data.
+     * @throws SQLException If there's an issue with accessing ResultSet data.
+     */
+	
     public static User buildUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("id"));
@@ -27,6 +54,16 @@ public class ResultSetUtil {
         user.setUserId(rs.getLong("user_id"));
         return user;
     }
+    
+    /**
+     * Builds a Task object from the data in the ResultSet.
+     * 
+     * @param rs The ResultSet containing task data.
+     * @return A Task object constructed from the ResultSet data.
+     * @throws SQLException If there's an issue with accessing ResultSet data.
+     */
+    
+    
     public static Task buildTaskFromResultSet(ResultSet rs) throws SQLException {
         Task task = new Task();
         task.setId(rs.getInt("id"));
@@ -42,6 +79,16 @@ public class ResultSetUtil {
         task.setTodoId(rs.getString("todoID"));
         return task;
     }
+    
+    /**
+     * Builds a Milestone object from the data in the ResultSet.
+     * 
+     * @param rs The ResultSet containing milestone data.
+     * @return A Milestone object constructed from the ResultSet data.
+     * @throws SQLException If there's an issue with accessing ResultSet data.
+     */
+    
+    
     public static Milestone buildMilestoneFromResultSet(ResultSet rs) throws SQLException {
         Milestone milestone = new Milestone();
         milestone.settasks_id(rs.getInt(1));

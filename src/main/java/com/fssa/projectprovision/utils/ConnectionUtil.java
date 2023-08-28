@@ -4,12 +4,43 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+/**
+ * 
+ * * A utility class for managing database connections.
+ * This class provides a method to establish a connection to the database using environment variables.
+ * It uses the MySQL JDBC driver for database connectivity.
+ * 
+ * 
+ *  * Usage:
+ * Connection connection = ConnectionUtil.getConnection();
+ * // Use the connection for database operations
+ * connection.close(); // Remember to close the connection when done
+ * 
+ * 
+ * 
+ * @author JayaprakashJaisankar
+ *
+ */
 public class ConnectionUtil {
 
+	
+	   /**
+     * Private constructor to prevent instantiation of the utility class.
+     */
+	
     private ConnectionUtil() {
         // Private constructor to prevent instantiation
     }
 
+    
+    /**
+     * Establishes a database connection using environment variables for database configuration.
+     * 
+     * @return A connection to the database.
+     * @throws RuntimeException If there's an issue with database driver loading or connection.
+     */
+    
     public static Connection getConnection() {
         final String dbUrl = System.getenv("DB_URL");
         final String dbUser = System.getenv("DB_USER");

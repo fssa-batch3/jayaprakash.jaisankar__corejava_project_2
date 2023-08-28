@@ -5,6 +5,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents a Milestone associated with a Project Task.
+ * 
+ * @author JayaprakashJaisankar
+ */
+
 public class Milestone {
 
     private int tasks_id;
@@ -13,10 +19,23 @@ public class Milestone {
     private LocalTime taskTime;
     private boolean isRemainder;
 
+    /**
+     * Default constructor for creating a Milestone object.
+     */
     public Milestone() {
         // Default constructor
     }
 
+    
+    /**
+     * Constructor for creating a Milestone object with specific attributes.
+     *
+     * @param tasks_id The ID of the associated task.
+     * @param taskText The text of the task.
+     * @param taskDate The date of the task.
+     * @param taskTime The time of the task.
+     * @param isRemainder Whether the task has a reminder.
+     */
     public Milestone(int todoId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
         this.tasks_id = tasks_id;
         this.taskText = taskText;
@@ -39,7 +58,7 @@ public class Milestone {
 
     public void setTaskText(String taskText) {
         this.taskText = taskText;
-    }
+    } 
 
     public LocalDate getTaskDate() {
         return taskDate;
@@ -64,6 +83,13 @@ public class Milestone {
     public void setRemainder(boolean remainder) {
         isRemainder = remainder;
     }
+    
+ 
+    /**
+     * Returns a string representation of the Milestone object.
+     *
+     * @return A string containing Milestone attribute values.
+     */
 
     @Override
     public String toString() {
@@ -77,45 +103,45 @@ public class Milestone {
     }
 
 	public void setUserId1(int int1) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	public void setTaskDetails(String string) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	public void setMilestone(Milestone milestone) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 
 
 	public void setUserId(int int1) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	public void setUserId11(int int1) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	public void setTaskDate1(Date date) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	public String gettasks_id() {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 
 	public void settasks_id(int int1) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 

@@ -12,11 +12,41 @@
 	import java.util.ArrayList;
 	import java.util.List;
 	
+	/**
+	 * 
+	 * 
+	 * The UserDAO class provides methods for accessing and manipulating user data in the database.
+     * This class is responsible for creating, retrieving, updating, and deleting user records.
+     *
+     * Usage:
+     * UserDAO userDAO = new UserDAO();
+     * boolean userCreated = userDAO.createUser(newUser);
+     * User retrievedUser = userDAO.getUserByEmail(email);
+     * // Use the methods to interact with the database and manipulate User records
+     *
+     *
+	 * @author JayaprakashJaisankar
+	 *
+	 */
 	public class UserDAO {
+		
+		
+		/**
+		 * Private constructor to prevent instantiation of the UserDAO class.
+		 * This class provides only static methods for accessing and manipulating user data in the database.
+		 */
 	
 	    private UserDAO() {
 	    }
-	
+	    
+	    /**
+	     * Creates a new user in the database with the provided user data.
+	     *
+	     * @param user The User object containing the user's information to be created.
+	     * @return True if the user creation was successful, false otherwise.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
+
 	    public static boolean createUser(User user) throws DAOException {
 	        String query = "INSERT INTO users (name, gender, mobile_number, date_of_birth, address, about_me, " +
 	                "email, password, profile_pic, mytodos, user_id) " +
@@ -43,7 +73,13 @@
 	            throw new DAOException(e);
 	        }
 	    }
-	
+	    /**
+	     * Retrieves a user's data from the database based on the provided email.
+	     *
+	     * @param email The email address associated with the user to be retrieved.
+	     * @return The User object containing the user's information, or null if not found.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
 	    public static User getUserByEmail(String email) throws DAOException {
 	        User user = null;
 	        String query = "SELECT id, name, gender, mobile_number, date_of_birth, address, about_me, email, " +
@@ -65,7 +101,12 @@
 	        }
 	        return user;
 	    }
-	
+	    /**
+	     * Retrieves a list of all users' data from the database.
+	     *
+	     * @return A List containing User objects with information about all users.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
 	    public static List<User> getAllUsers() throws DAOException {
 	        List<User> userList = new ArrayList<>();
 	        String query = "SELECT id, name, gender, mobile_number, date_of_birth, address, about_me, email, " +
@@ -84,8 +125,13 @@
 	        }
 	        return userList;
 	    }
-	
-	    public static boolean updateUser(User user) throws DAOException {
+	    /**
+	     * Updates a user's data in the database with the provided user information.
+	     *
+	     * @param user The User object containing the updated user's information.
+	     * @return True if the user update was successful, false otherwise.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */  public static boolean updateUser(User user) throws DAOException {
 	        String query = "UPDATE users SET " +
 	                "name = ?, gender = ?, mobile_number = ?, date_of_birth = ?, address = ?, about_me = ?, " +
 	                "password = ?, profile_pic = ?, mytodos = ? " +
@@ -112,7 +158,13 @@
 	            throw new DAOException(e);
 	        }
 	    } 
-	    
+	     /**
+	      * Deletes a user from the database based on the provided email.
+	      *
+	      * @param email The email address associated with the user to be deleted.
+	      * @return True if the user deletion was successful, false otherwise.
+	      * @throws DAOException If there's an issue with the database operation.
+	      */
 	    
 	    public static boolean deleteUserByEmail(String email) throws DAOException {
 	        User userToDelete = getUserByEmail(email);
@@ -166,7 +218,19 @@
 //	            throw new DAOException(e);
 //	        }
 //	    }
-	    public static boolean loginUser(String email, String password) throws DAOException {
+	    
+	    
+	    /**
+	     * Validates user credentials by checking if a user with the provided email and password exists in the database.
+	     *
+	     * @param email The email address of the user.
+	     * @param password The password of the user.
+	     * @return True if the user with matching credentials was found, false otherwise.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
+	    
+	    
+	    static boolean loginUser(String email, String password) throws DAOException {
 	        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 	        try (Connection connection = ConnectionUtil.getConnection();
 	             PreparedStatement pst = connection.prepareStatement(query)) {
@@ -182,6 +246,15 @@
 	            throw new DAOException(e);
 	        }
 	    }
+	    
+	    /**
+	     * Constructs a User object from the ResultSet containing user information.
+	     *
+	     * @param rs The ResultSet containing user information retrieved from the database.
+	     * @return A User object with information extracted from the ResultSet.
+	     * @throws SQLException If there's an issue with retrieving data from the ResultSet.
+	     */
+	    
 	
 	    private static User buildUserFromResultSet(ResultSet rs) throws SQLException {
 	        User user = new User();

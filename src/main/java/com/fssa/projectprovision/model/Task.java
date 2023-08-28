@@ -3,6 +3,15 @@ package com.fssa.projectprovision.model;
 import java.sql.Date;
 import java.time.LocalDate;
 
+
+/**
+ * Represents a Task associated with a project.
+ * 
+ * This class stores information about tasks, including their details, due date,
+ * assignee, status, and more.
+ *
+ * @author JayaprakashJaisankar
+ */
 public class Task {
     private int id;
     private String taskName;
@@ -16,8 +25,28 @@ public class Task {
     private String taskTags;
     private String todoId;
 
+    
+    /**
+     * Default constructor for creating a Task object.
+     */
     public Task() {
     }
+    
+    /**
+     * Constructor for creating a Task object with specific attributes.
+     *
+     * @param id The ID of the task.
+     * @param taskName The name of the task.
+     * @param taskDetails The details of the task.
+     * @param taskCategory The category of the task.
+     * @param taskDue The due date of the task.
+     * @param taskAssignee The assignee of the task.
+     * @param taskStatus The status of the task.
+     * @param projectName The name of the associated project.
+     * @param taskPriority The priority of the task.
+     * @param taskTags The tags associated with the task.
+     * @param todoId The ID of the associated ToDo.
+     */
 
     public Task(int id, String taskName, String taskDetails, String taskCategory,
     		LocalDate date, String taskAssignee, String taskStatus, String projectName,
@@ -128,6 +157,13 @@ public class Task {
         this.todoId = todoId;
     }
 
+    
+    
+    /**
+     * Returns a string representation of the Task object.
+     *
+     * @return A string containing Task attribute values.
+     */
     @Override
     public String toString() {
         return "Task{" +

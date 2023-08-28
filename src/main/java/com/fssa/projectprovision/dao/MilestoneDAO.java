@@ -11,7 +11,35 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * 
+ *  A data access object for managing Milestone data in the database.
+ * Provides methods to interact with and manipulate Milestone records.
+ *
+ * Usage:
+ * MilestoneDAO milestoneDAO = new MilestoneDAO();
+ * List<Milestone> projectTasks = milestoneDAO.getProjectTasksWithMilestones();
+ * // Use the methods to interact with the database and manipulate Milestone records
+ * 
+ * 
+ * 
+ * @author JayaprakashJaisankar
+ *
+ */
+
+
+/**
+ * A data access object for managing Milestone data in the database.
+ * Provides methods to interact with and manipulate Milestone records.
+ *
+ */
 public class MilestoneDAO { 
+    /**
+     * Retrieves a list of Project Tasks with associated Milestones from the database.
+     *
+     * @return A list of Milestone objects representing Project Tasks with Milestones.
+     */
 
     public static List<Milestone> getProjectTasksWithMilestones() {
         List<Milestone> projectTasks = new ArrayList<>();
@@ -32,7 +60,12 @@ public class MilestoneDAO {
         }
         return projectTasks;
     }
-
+    /**
+     * Inserts a new Milestone record into the database.
+     *
+     * @param milestone The Milestone object to be inserted.
+     * @return True if the insertion was successful, false otherwise.
+     */
     public boolean insertMilestone(Milestone milestone) {
         String query = "INSERT INTO milestone (task_text, task_date, task_time, is_remainder,tasks_id) " +
                        "VALUES (?, ?, ?, ?, ?)";
@@ -54,7 +87,13 @@ public class MilestoneDAO {
             return false;
         }
     }
-
+    
+    /**
+     * Updates an existing Milestone record in the database.
+     *
+     * @param milestone The updated Milestone object.
+     * @return True if the update was successful, false otherwise.
+     */
 
     public boolean updateMilestone(Milestone milestone) {
         String query = "UPDATE milestone SET task_text = ?, task_date = ?, task_time = ?, is_remainder = ? " +
@@ -76,6 +115,14 @@ public class MilestoneDAO {
             return false;
         }
     }
+    
+
+    /**
+     * Deletes Milestone records associated with a given ToDo ID from the database.
+     *
+     * @param tasks_id The ToDo ID for which Milestone records should be deleted.
+     * @return True if the deletion was successful, false otherwise.
+     */
 
     public boolean deleteMilestoneByTodoId(int todoId) {
         String query = "DELETE FROM milestone WHERE tasks_id = ?";
@@ -94,6 +141,13 @@ public class MilestoneDAO {
     }
 
 
+    /**
+     * Builds a Milestone object from a ResultSet.
+     *
+     * @param rs The ResultSet containing Milestone data.
+     * @return A Milestone object built from the ResultSet data.
+     * @throws SQLException If a database error occurs.
+     */
     private static Milestone buildMilestoneFromResultSet(ResultSet rs) throws SQLException {
         Milestone milestone = new Milestone();
       
@@ -106,7 +160,12 @@ public class MilestoneDAO {
         milestone.settasks_id(rs.getInt("tasks_id"));
         return milestone;
     }
-
+  
+    /**
+     * Handles SQLException by printing the stack trace and throwing a RuntimeException.
+     *
+     * @param e The SQLException that occurred.
+     */
     private static void handleSQLException(SQLException e) {
         e.printStackTrace();
         throw new RuntimeException("An error occurred while accessing the database.", e);
@@ -115,18 +174,21 @@ public class MilestoneDAO {
 
 	
 
-	public List<Milestone> getAllMilestones() {
-		return null;
-	}
+		public List<Milestone> getAllMilestones() {
+			return null;
+		}
+
 
 	public Milestone getMilestoneById(int id) {
 		return null;
 	}
 
+	
+
 	public void setTodoId(String string) {
 		
 	}
-
+	
 	public void setTaskText(String string) {
 	
 	}
@@ -134,8 +196,7 @@ public class MilestoneDAO {
 	public void setTaskDate(LocalDate now) {
 
 	}
-
-	public void setTaskTime(LocalTime now) {
+		public void setTaskTime(LocalTime now) {
 	
 	}
 

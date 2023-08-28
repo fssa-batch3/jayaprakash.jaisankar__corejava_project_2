@@ -1,5 +1,23 @@
 package com.fssa.projectprovision.exception;
 
+/**
+ * 
+ * 
+ * An exception class for indicating errors related to service layer operations.
+ * This exception is thrown when errors occur during business logic or service operations.
+ * 
+ * Usage:
+ * try {
+ *     // Code that might throw a ServiceException
+ * } catch (ServiceException e) {
+ *     // Handle the exception appropriately
+ * }
+
+
+
+ * @author JayaprakashJaisankar
+ *
+ */
 public class ServiceException extends Exception {
 
     /**

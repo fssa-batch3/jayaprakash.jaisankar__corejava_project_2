@@ -1,6 +1,22 @@
 package com.fssa.projectprovision.exception;
 
 
+/**
+ * 
+ *  An exception class for indicating validation errors. This exception is thrown when
+ * data validation fails in the application.
+ * 
+ * Usage:
+ * try {
+ *     // Code that might throw a ValidationException
+ * } catch (ValidationException e) {
+ *     // Handle the validation exception appropriately
+ * }
+ * 
+ * 
+ * @author JayaprakashJaisankar
+ *
+ */
 public class ValidationException extends Exception {
 
 	/**

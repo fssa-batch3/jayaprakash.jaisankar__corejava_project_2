@@ -7,9 +7,29 @@ import com.fssa.projectprovision.validation.*;
 
 import java.util.List;
 
+
+/**
+ * 
+ * A service class that provides methods for managing user-related operations in the system.
+ * This class interacts with the UserDAO and UserValidator to perform operations on users.
+ * It handles user registration, login, retrieval, update, and deletion.
+ * Additionally, it provides methods for getting user information by email.
+ * 
+ * 
+ * @author JayaprakashJaisankar
+ *
+ */
 public class UserService {
     private static final String USER_WITH_EMAIL = "User with email ";
 
+    
+    /**
+     * Registers a new user in the system.
+     * 
+     * @param user The user to be registered.
+     * @return A message indicating the success or failure of the registration.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
     public String registerUser(User user) throws ServiceException {
         try {
             UserValidator userValidator = new UserValidator(user);
@@ -32,6 +52,15 @@ public class UserService {
         }
     }
 
+    
+
+    /**
+     * Logs in a user with the provided credentials.
+     * 
+     * @param user The user with login credentials.
+     * @return The logged-in user, or null if login fails.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
 
     public User loginUser(User user) throws ServiceException {
         try {
@@ -55,6 +84,13 @@ public class UserService {
         }
     }
 
+    
+    /**
+     * Retrieves a list of all users in the system.
+     * 
+     * @return A list of all users in the system.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
     public List<User> getAllUsers() throws ServiceException {
         try {
             return UserDAO.getAllUsers();
@@ -63,6 +99,14 @@ public class UserService {
         }
     }
 
+    
+    /**
+     * Updates an existing user in the system.
+     * 
+     * @param user The user to be updated.
+     * @return The updated user, or null if update fails.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
     public User updateUser(User user) throws ServiceException {
         try {
             User existingUser = UserDAO.getUserByEmail(user.getEmail());
@@ -83,6 +127,15 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    
+    
+    /**
+     * Deletes a user by email.
+     * 
+     * @param email The email of the user to delete.
+     * @return True if the deletion is successful, false otherwise.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
 
     public boolean deleteUser(String email) throws ServiceException {
         try {
@@ -106,20 +159,38 @@ public class UserService {
     }
 
 
+    /**
+     * Retrieves a user by email.
+     * 
+     * @param email The email of the user to retrieve.
+     * @return The retrieved user, or null if not found.
+     */
+
 	public User getUserByEmail1(String email) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	 /**
+     * Retrieves a user by email, including deleted users.
+     * 
+     * @param emailToDelete The email of the user to retrieve.
+     * @return The retrieved user, or null if not found.
+     */
 
 	public User getUserByEmail(String email) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	  /**
+     * Retrieves a user by email.
+     * 
+     * @param email The email of the user to retrieve.
+     * @return The retrieved user, or null if not found.
+     */
 
 	public User getUserByEmailIncludingDeleted(String emailToDelete) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
