@@ -2,7 +2,7 @@ package com.fssa.projectprovision.dao;
 
 import com.fssa.projectprovision.model.Milestone;
 
-import com.fssa.projectprovision.service.MilestoneService;
+
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
 import java.sql.*;
@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MilestoneDAO {
+public class MilestoneDAO { 
 
     public static List<Milestone> getProjectTasksWithMilestones() {
         List<Milestone> projectTasks = new ArrayList<>();
@@ -124,28 +124,23 @@ public class MilestoneDAO {
 	}
 
 	public void setTodoId(String string) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void setTaskText(String string) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 	public void setTaskDate(LocalDate now) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setTaskTime(LocalTime now) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 	public void setRemainder(boolean b) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
     
