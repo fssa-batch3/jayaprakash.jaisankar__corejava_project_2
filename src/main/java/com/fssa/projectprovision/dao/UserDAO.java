@@ -111,33 +111,61 @@
 	        } catch (SQLException e) {
 	            throw new DAOException(e);
 	        }
-	    }
-	
+	    } 
+	    
+	    
 	    public static boolean deleteUserByEmail(String email) throws DAOException {
 	        User userToDelete = getUserByEmail(email);
-	
+
 	        if (userToDelete == null) {
 	            throw new DAOException("User with email " + email + " not found.");
 	        }
-	
-	        if (!userToDelete.isActive()) {
-	            // Handle the case when the user is already inactive
+
+	        if (userToDelete.isDeleted()) {
+	            // Handle the case when the user is already marked as deleted
 	            return false;
 	        }
-	
-	        String query = "UPDATE users SET mytodos = ?, profile_pic = NULL WHERE email = ?";
+
+	        String query = "UPDATE users SET mytodos = NULL, profile_pic = NULL, isDeleted = true WHERE email = ?";
 	        try (Connection connection = ConnectionUtil.getConnection();
 	             PreparedStatement pst = connection.prepareStatement(query)) {
-	
-	            pst.setString(1, null);
-	            pst.setString(2, email);
-	
+
+	            pst.setString(1, email);
+
 	            int rowsAffected = pst.executeUpdate();
 	            return rowsAffected > 0;
 	        } catch (SQLException e) {
 	            throw new DAOException(e);
 	        }
 	    }
+	    
+	    
+//	
+//	    public static boolean deleteUserByEmail(String email) throws DAOException {
+//	        User userToDelete = getUserByEmail(email);
+//	
+//	        if (userToDelete == null) {
+//	            throw new DAOException("User with email " + email + " not found.");
+//	        }
+//	
+//	        if (!userToDelete.isActive()) {
+//	            // Handle the case when the user is already inactive
+//	            return false;
+//	        }
+//	
+//	        String query = "UPDATE users SET mytodos = ?, profile_pic = NULL WHERE email = ?";
+//	        try (Connection connection = ConnectionUtil.getConnection();
+//	             PreparedStatement pst = connection.prepareStatement(query)) {
+//	
+//	            pst.setString(1, null);
+//	            pst.setString(2, email);
+//	
+//	            int rowsAffected = pst.executeUpdate();
+//	            return rowsAffected > 0;
+//	        } catch (SQLException e) {
+//	            throw new DAOException(e);
+//	        }
+//	    }
 	    public static boolean loginUser(String email, String password) throws DAOException {
 	        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 	        try (Connection connection = ConnectionUtil.getConnection();

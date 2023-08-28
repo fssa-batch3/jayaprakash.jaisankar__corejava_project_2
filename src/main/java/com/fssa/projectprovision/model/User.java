@@ -17,14 +17,15 @@ public class User {
     private String profilePic;
     private String myTodos; // Represent JSON as a String
     private long userId;
+    private boolean isDeleted;
 
    
-    public User() {
+    public User() { 
     }
 
     public User(String name, String gender, String mobileNumber, LocalDate dateOfBirth,
                 String address, String aboutMe, String email, String password,
-                String profilePic, String myTodos, long userId) {
+                String profilePic, String myTodos, long userId,boolean isDeleted) {
         this.name = name;
         this.gender = gender;
         this.mobileNumber = mobileNumber;
@@ -36,9 +37,21 @@ public class User {
         this.profilePic = profilePic;
         this.myTodos = myTodos;
         this.userId = userId;
+        this.isDeleted = isDeleted;
     }
 
     // Getters and Setters
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public boolean isActive() {
+        return !isDeleted;
+    }
     public long getId() {
         return id;
     }
@@ -137,10 +150,7 @@ public class User {
         this.userId = userId;
     }
 
-	public boolean isActive() {
-
-		return false;
-	}
+	
 
 	public void setDateOfBirth(Date valueOf) {
 
@@ -151,5 +161,7 @@ public class User {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }
 

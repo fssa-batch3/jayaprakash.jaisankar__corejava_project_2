@@ -69,14 +69,15 @@ public class UserService {
             if (existingUser == null) {
                 throw new ServiceException(USER_WITH_EMAIL + user.getEmail() + " does not exist.");
             }
-            try {
-				if (!UserDAO.updateUser(user)) {
-				    throw new ServiceException("User Update Failed");
-				}
-			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            
+            if (existingUser.isDeleted()) {
+                throw new ServiceException(USER_WITH_EMAIL + user.getEmail() + " has been deleted.");
+            }
+            
+            if (!UserDAO.updateUser(user)) {
+                throw new ServiceException("User Update Failed");
+            }
+
             return UserDAO.getUserByEmail(user.getEmail());
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -89,14 +90,26 @@ public class UserService {
             if (existingUser == null) {
                 throw new ServiceException(USER_WITH_EMAIL + email + " does not exist.");
             }
+            
+            if (existingUser.isDeleted()) {
+                throw new ServiceException(USER_WITH_EMAIL + email + " has already been deleted.");
+            }
+            
             if (!existingUser.isActive()) {
                 throw new ServiceException(USER_WITH_EMAIL + email + " is already inactive.");
             }
+            
             return UserDAO.deleteUserByEmail(email);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
+
+
+	public User getUserByEmail1(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	public User getUserByEmail(String email) {
@@ -105,8 +118,12 @@ public class UserService {
 	}
 
 
-	public void updateUser1(User user) {
+	public User getUserByEmailIncludingDeleted(String emailToDelete) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
+
+
 }
