@@ -24,7 +24,7 @@ public class TestTaskService {
         // Create a sample Task with valid attributes
         task = new Task();
         task.setTaskName("Sample Task");
-        task.setTaskDue(LocalDate.now().plusDays(1));
+        task.setTaskDue(LocalDate.now().plusDays(1)); 
         task.setTaskDetails("Sample details");
         task.setTaskCategory("Sample category");
         task.setTaskAssignee("Sample assignee");
@@ -34,7 +34,7 @@ public class TestTaskService {
         task.setTaskTags("Tag1, Tag2");
 
         // Set a valid todo ID format matching the regular expression
-        task.setTodoId("abcdef0123456789ABCDEF0987654981");
+        task.setTodoId("abcdef0123456789ABCDEF0987654881");
     }
 
     @Test

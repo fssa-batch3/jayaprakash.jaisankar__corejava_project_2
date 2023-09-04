@@ -75,7 +75,7 @@ public class UserService {
                 return fromDb;
             } else {
                 throw new ServiceException("User Not Found");
-            }
+            } 
         } catch (ValidationException e) {
             throw new ServiceException(e);
         }

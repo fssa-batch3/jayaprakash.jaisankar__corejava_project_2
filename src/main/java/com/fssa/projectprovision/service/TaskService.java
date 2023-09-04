@@ -44,7 +44,7 @@ public class TaskService {
      * @return True if the creation is successful, false otherwise.
      * @throws ServiceException If there's an issue with the service operation.
      */
-    
+     
     
     public boolean createTask(Task task) throws ServiceException {
     	boolean result = false;
@@ -55,7 +55,7 @@ public class TaskService {
             throw new ServiceException("Failed to create first task", e);
         }
         return result;
-    }
+    } 
 
 
     

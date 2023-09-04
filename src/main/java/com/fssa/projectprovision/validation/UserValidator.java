@@ -229,7 +229,7 @@ public class UserValidator {
     public boolean validateMyTodos(String myTodos) throws ValidationException {
    
         return true;
-    }
+    } 
 
     
     /**

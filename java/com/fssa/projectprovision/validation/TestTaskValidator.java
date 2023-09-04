@@ -22,7 +22,7 @@ public class TestTaskValidator {
                 "Project", "Priority", "Tag1, Tag2", "0123456789abcdef0123456789abcdef");
         
        // assertDoesNotThrow(() -> TaskValidator.validateTask(validTask));
-    }
+    } 
 
     @Test
     public void testInvalidTaskName() {

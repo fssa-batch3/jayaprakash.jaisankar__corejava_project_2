@@ -53,8 +53,11 @@ public class TaskValidator {
         validateTodoId(task.getTodoId());
         
     }
-
-    
+/**TODO 
+ * callALL the  methods where it want 
+ * in service call the validator 
+ */
+     
     /**
      * Validates the task name.
      * 
@@ -197,7 +200,7 @@ public class TaskValidator {
         if (!Pattern.matches(VALID_TAGS_PATTERN, taskTags)) {
             throw new ValidationException("Invalid task tags format");
         }
-    }
+    } 
 
     
     /**
