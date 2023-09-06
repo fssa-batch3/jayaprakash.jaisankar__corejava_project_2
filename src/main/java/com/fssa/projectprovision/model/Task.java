@@ -14,6 +14,8 @@ import java.time.LocalDate;
  */
 public class Task {
     private int id;
+    private String category;
+    private String description;
     private String taskName;
     private String taskDetails;
     private String taskCategory;
@@ -71,7 +73,7 @@ public class Task {
 
 	public int getId() {
         return id;
-    }
+    } 
 
     public void setId(int id) {
         this.id = id;
@@ -158,7 +160,21 @@ public class Task {
     }
 
     
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     /**
      * Returns a string representation of the Task object.
      *

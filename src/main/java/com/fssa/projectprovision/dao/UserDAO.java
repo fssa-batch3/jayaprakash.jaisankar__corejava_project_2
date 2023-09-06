@@ -254,7 +254,7 @@
 	     * @return A User object with information extracted from the ResultSet.
 	     * @throws SQLException If there's an issue with retrieving data from the ResultSet.
 	     */
-	    
+	     
 	
 	    private static User buildUserFromResultSet(ResultSet rs) throws SQLException {
 	        User user = new User();

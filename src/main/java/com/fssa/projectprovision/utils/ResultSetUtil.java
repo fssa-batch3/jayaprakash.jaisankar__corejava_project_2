@@ -91,11 +91,11 @@ public class ResultSetUtil {
     
     public static Milestone buildMilestoneFromResultSet(ResultSet rs) throws SQLException {
         Milestone milestone = new Milestone();
-        milestone.settasks_id(rs.getInt(1));
+        milestone.setTasks_id(rs.getInt(1));
         milestone.setTaskText(rs.getString("task_text"));
         milestone.setTaskDate(rs.getDate("task_date").toLocalDate());
         milestone.setTaskTime(rs.getTime("task_time").toLocalTime());
-        milestone.setRemainder(rs.getBoolean("is_remainder"));
+        milestone.setIsRemainder(rs.getBoolean("is_remainder"));
         return milestone;
     }
 }

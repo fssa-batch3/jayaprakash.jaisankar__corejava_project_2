@@ -74,7 +74,7 @@ public class MilestoneService {
      * 
      * @return A list of all milestones in the system.
      * @throws ServiceException If there's an issue with the service operation.
-     * @throws DAOException If there's an issue with the data access operation.
+     * @throws DAO Exception If there's an issue with the data access operation.
      */
 
     public List<Milestone> getAllMilestones() throws ServiceException, DAOException {

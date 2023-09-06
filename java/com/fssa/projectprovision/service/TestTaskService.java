@@ -18,10 +18,9 @@ public class TestTaskService {
 
     @BeforeEach
     void setUp() {
-        TaskDAO taskDAO = new TaskDAO(); // Replace this with the actual instantiation of your TaskDAO
+        TaskDAO taskDAO = new TaskDAO(); 
         taskService = new TaskService(taskDAO);
 
-        // Create a sample Task with valid attributes
         task = new Task();
         task.setTaskName("Sample Task");
         task.setTaskDue(LocalDate.now().plusDays(1)); 
@@ -33,18 +32,15 @@ public class TestTaskService {
         task.setTaskPriority("High");
         task.setTaskTags("Tag1, Tag2");
 
-        // Set a valid todo ID format matching the regular expression
-        task.setTodoId("abcdef0123456789ABCDEF0987654881");
+        task.setTodoId("abcdef0123456789ABCDEF0987654888");
     }
 
     @Test
     @Order(1)
     void testCreateTask_Success() {
         try {
-            // Act: Attempt to create the task
             boolean result = taskService.createTask(task);
 
-            // Assert: Check if the result is as expected
             assertTrue(result, "Task creation should succeed");
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -55,7 +51,7 @@ public class TestTaskService {
     @Test
     @Order(2)
     void testCreateTask_Failure() {
-        Task invalidTask = new Task(); // Renamed to avoid shadowing the 'task' instance
+        Task invalidTask = new Task();
         invalidTask.setTaskName("Sample Task");
         invalidTask.setTaskDue(LocalDate.now().plusDays(1));
         invalidTask.setTaskDetails("Sample details");
@@ -104,11 +100,10 @@ public class TestTaskService {
     @Test
     @Order(5)
     void testUpdateTask() {
-        // Create a new Task instance with updated attributes
         Task updatedTask = new Task();
-        updatedTask.setId(1); // Set the same ID as the task you want to update
+        updatedTask.setId(1); 
         updatedTask.setTaskName("Updated Task Name");
-        updatedTask.setTaskDue(LocalDate.now().plusDays(2)); // Updated due date
+        updatedTask.setTaskDue(LocalDate.now().plusDays(2)); 
         updatedTask.setTaskDetails("Updated details");
         updatedTask.setTaskCategory("Updated category");
         updatedTask.setTaskAssignee("Updated assignee");
@@ -116,8 +111,7 @@ public class TestTaskService {
         updatedTask.setProjectName("Updated project");
         updatedTask.setTaskPriority("Updated priority");
         updatedTask.setTaskTags("Updated Tag1, Updated Tag2");
-        updatedTask.setTodoId("abcdef0123456789ABCDEF0123456789"); // Set the same todoId as the task you want to update
-
+        updatedTask.setTodoId("abcdef0123456789ABCDEF0123456789");
         try {
             String result = taskService.updateTask(updatedTask);
             assertEquals("Task Updated Successfully", result);
@@ -130,7 +124,7 @@ public class TestTaskService {
     @Test
     @Order(6)
     void testDeleteTaskById() {
-        int taskIdToDelete = 1;
+        int taskIdToDelete = 17;
 
         try {
             String result = taskService.deleteTaskById(taskIdToDelete);

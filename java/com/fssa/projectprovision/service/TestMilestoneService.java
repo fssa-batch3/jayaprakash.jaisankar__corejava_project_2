@@ -28,11 +28,11 @@ public class TestMilestoneService {
     @Test
     void testInsertMilestone() {
         Milestone milestone = new Milestone();
-        milestone.settasks_id(1); 
+        milestone.setTasks_id(1); 
         milestone.setTaskText("Sample Task");
         milestone.setTaskDate(LocalDate.of(2023, 8, 25));
         milestone.setTaskTime(LocalTime.of(10, 30));
-        milestone.setRemainder(true);
+        milestone.setIsRemainder(true);
 
         try {
             assertTrue(milestoneService.insertMilestone(milestone));
@@ -45,11 +45,11 @@ public class TestMilestoneService {
     @Test
     void testUpdateMilestone() {
         Milestone milestone = new Milestone();
-        milestone.settasks_id(1);
+        milestone.setTasks_id(1);
         milestone.setTaskText("Updated Task");
         milestone.setTaskDate(LocalDate.of(2023, 8, 25));
         milestone.setTaskTime(LocalTime.of(10, 30));
-        milestone.setRemainder(true);
+        milestone.setIsRemainder(true);
 
         try {
             assertTrue(milestoneService.updateMilestone(milestone));
@@ -110,7 +110,7 @@ public class TestMilestoneService {
         @Override
         public Milestone getMilestoneById(int milestoneId) {
             return milestones.stream()
-                    .filter(m -> Integer.parseInt(m.gettasks_id()) == milestoneId)
+                    .filter(m -> m.gettasks_id() == milestoneId)
                     .findFirst()
                     .orElse(null);
         }
@@ -122,8 +122,9 @@ public class TestMilestoneService {
 
         @Override
         public boolean deleteMilestoneByTodoId(int milestoneId) {
-            milestones.removeIf(m -> Integer.parseInt(m.gettasks_id()) == milestoneId);
+            milestones.removeIf(m -> m.gettasks_id() == milestoneId);
             return true;
         }
+
     }
 }

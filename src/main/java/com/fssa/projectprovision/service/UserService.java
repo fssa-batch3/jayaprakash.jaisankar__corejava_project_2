@@ -196,5 +196,19 @@ public class UserService {
 
 
 
+	public int getId(int userId) {
+		// TODO Auto-generated method stub
+		return userId;
+	}
+
+
+
+	public int getUserById(int userId) {
+		// TODO Auto-generated method stub
+		return userId;
+	}
+
+
+
 
 }

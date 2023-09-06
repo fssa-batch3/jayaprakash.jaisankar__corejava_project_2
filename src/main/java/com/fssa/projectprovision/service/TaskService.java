@@ -2,11 +2,16 @@ package com.fssa.projectprovision.service;
 
 import com.fssa.projectprovision.dao.TaskDAO;
 
+
 import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.exception.ValidationException;
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.validation.TaskValidator;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -145,4 +150,50 @@ public class TaskService {
 
 		return false;
 	}
+
+
+	public Task getId(long taskId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Task> getFilteredAndSortedTasks(String sortCriteria, String filterCriteria, String searchKeyword) throws ServiceException {
+	    try {
+	        List<Task> filteredAndSortedTasks = new ArrayList<>();
+	        List<Task> allTasks = taskDAO.getAllTasks();
+
+	        if ("Based On Category".equals(filterCriteria)) {
+	            for (Task task : allTasks) {
+	                if (task.getCategory().equalsIgnoreCase(searchKeyword)) {
+	                    filteredAndSortedTasks.add(task);
+	                }
+	            }
+	        }
+
+//	        if ("Based On Due date".equals(sortCriteria)) {
+//	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getDueDate));
+//	        }
+
+
+	        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+	            List<Task> searchResults = new ArrayList<>();
+	            for (Task task : filteredAndSortedTasks) {
+	                // Replace this line with your custom search logic based on your Task class
+	                if (task.getDescription().toLowerCase().contains(searchKeyword.toLowerCase())) {
+	                    searchResults.add(task);
+	                }
+	            }
+	            return searchResults;
+	        }
+
+	        return filteredAndSortedTasks;
+	    } catch (DAOException e) {
+	        throw new ServiceException("Failed to retrieve filtered and sorted tasks", e);
+	    }
+	}
+
+
+
+
+
 }

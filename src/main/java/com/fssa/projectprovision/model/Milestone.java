@@ -1,6 +1,5 @@
 package com.fssa.projectprovision.model;
 
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,9 +9,8 @@ import java.time.LocalTime;
  * 
  * @author JayaprakashJaisankar
  */
-
 public class Milestone {
-
+	 private int id;
     private int tasks_id;
     private String taskText;
     private LocalDate taskDate;
@@ -26,29 +24,36 @@ public class Milestone {
         // Default constructor
     }
 
-    
     /**
      * Constructor for creating a Milestone object with specific attributes.
      *
-     * @param tasks_id The ID of the associated task.
-     * @param taskText The text of the task.
-     * @param taskDate The date of the task.
-     * @param taskTime The time of the task.
+     * @param taskId   The ID of the associated task.
+     * @param taskText   The text of the task.
+     * @param taskDate   The date of the task.
+     * @param taskTime   The time of the task.
      * @param isRemainder Whether the task has a reminder.
      */
-    public Milestone(int todoId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
-        this.tasks_id = tasks_id;
+    public Milestone(int id,int taskId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
+    	 this.id = id;
         this.taskText = taskText;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
         this.isRemainder = isRemainder;
     }
+    public int getId() {
+        return id;
+    } 
 
-    public int gettasks_id1() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public int getTasks_id() {
         return tasks_id;
     }
 
-    public void setTodoId(int tasks_id) {
+    public void setTasks_id(int tasks_id) {
         this.tasks_id = tasks_id;
     }
 
@@ -58,14 +63,14 @@ public class Milestone {
 
     public void setTaskText(String taskText) {
         this.taskText = taskText;
-    } 
+    }
 
     public LocalDate getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(LocalDate localDate) {
-        this.taskDate = localDate;
+    public void setTaskDate(LocalDate taskDate) {
+        this.taskDate = taskDate;
     }
 
     public LocalTime getTaskTime() {
@@ -76,31 +81,31 @@ public class Milestone {
         this.taskTime = taskTime;
     }
 
-    public boolean isRemainder() {
+    public boolean getIsRemainder() {
         return isRemainder;
     }
 
-    public void setRemainder(boolean remainder) {
-        isRemainder = remainder;
+    public void setIsRemainder(boolean isRemainder) {
+        this.isRemainder = isRemainder;
     }
-    
- 
+
     /**
      * Returns a string representation of the Milestone object.
      *
      * @return A string containing Milestone attribute values.
      */
-
     @Override
     public String toString() {
-        return "Milestone{" +
-                "tasks_id='" + tasks_id + '\'' +
+        return "Milestone{"+ 
+                "id=" + id +
+                "tasks_id=" + tasks_id +
                 ", taskText='" + taskText + '\'' +
                 ", taskDate=" + taskDate +
                 ", taskTime=" + taskTime +
                 ", isRemainder=" + isRemainder +
                 '}';
     }
+
 
 	public void setUserId1(int int1) {
 
@@ -132,18 +137,18 @@ public class Milestone {
 	public void setTaskDate1(Date date) {
 	
 		
-	}
+	} 
 
-	public String gettasks_id() {
+	public int gettasks_id() {
 	
-		return null;
+		return tasks_id;
 	}
 
 
-	public void settasks_id(int int1) {
 	
-		
-	}
+
+
+	
 
 
 }
