@@ -3,11 +3,10 @@ package com.fssa.projectprovision.dao;
 import com.fssa.projectprovision.model.Milestone;
 
 
+
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

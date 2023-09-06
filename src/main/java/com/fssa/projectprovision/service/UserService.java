@@ -177,9 +177,6 @@ public class UserService {
      * @return The retrieved user, or null if not found.
      */
 
-	public User getUserByEmail(String email) {
-		return null;
-	}
 
 	
 	  /**
@@ -189,22 +186,16 @@ public class UserService {
      * @return The retrieved user, or null if not found.
      */
 
-	public User getUserByEmailIncludingDeleted(String emailToDelete) {
-
-		return null;
-	}
 
 
 
 	public int getId(int userId) {
-		// TODO Auto-generated method stub
 		return userId;
 	}
 
 
 
 	public int getUserById(int userId) {
-		// TODO Auto-generated method stub
 		return userId;
 	}
 
