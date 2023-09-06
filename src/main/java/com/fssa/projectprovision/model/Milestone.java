@@ -40,6 +40,14 @@ public class Milestone {
         this.taskTime = taskTime;
         this.isRemainder = isRemainder;
     }
+    
+    public Milestone(int taskId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
+    	this.tasks_id = taskId;
+       this.taskText = taskText;
+       this.taskDate = taskDate;
+       this.taskTime = taskTime;
+       this.isRemainder = isRemainder;
+   }
     public int getId() {
         return id;
     } 
@@ -47,7 +55,7 @@ public class Milestone {
     public void setId(int id) {
         this.id = id;
     }
-
+ 
 
     public int getTasks_id() {
         return tasks_id;

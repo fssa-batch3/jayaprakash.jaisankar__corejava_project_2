@@ -176,7 +176,7 @@ public class TestUserValidator {
         assertTrue(userValidator.validateMyTodos(validMyTodos));
     }
 
-
+ 
     @Test
     void testValidUserId() throws ValidationException {
         long validUserId = 12345;
@@ -188,5 +188,94 @@ public class TestUserValidator {
         long invalidUserId = 0;
         assertThrows(ValidationException.class, () -> userValidator.validateUserId(invalidUserId));
     }
+    
+    @Test
+    void testInvalidName_Null() {
+        String nullName = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateName(nullName));
+    }
+
+    
+    @Test
+    void testInvalidGender_SpecialCharacters() {
+        String specialCharsGender = "G@";
+        assertThrows(ValidationException.class, () -> userValidator.validateGender(specialCharsGender));
+    }
+
+    @Test
+    void testInvalidGender_Numbers() {
+        String numbersGender = "123";
+        assertThrows(ValidationException.class, () -> userValidator.validateGender(numbersGender));
+    }
+
+    @Test
+    void testInvalidMobileNumber_Null() {
+        String nullMobileNumber = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateMobileNumber(nullMobileNumber));
+    }
+
+ 
+    @Test
+    void testInvalidDateOfBirth_Null() {
+        LocalDate nullDateOfBirth = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateDateOfBirth(nullDateOfBirth));
+    }
+
+  
+    @Test
+    void testInvalidAddress_Null() {
+        String nullAddress = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateAddress(nullAddress));
+    }
+
+   
+
+    @Test
+    void testInvalidAboutMe_Null() {
+        String nullAboutMe = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateAboutMe(nullAboutMe));
+    }
+
+
+    @Test
+    void testInvalidEmail_Null() {
+        String nullEmail = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateEmail(nullEmail));
+    }
+
+    @Test
+    void testInvalidEmail_InvalidFormat1() {
+        String invalidEmail = "invalid_email";
+        assertThrows(ValidationException.class, () -> userValidator.validateEmail(invalidEmail));
+    }
+
+    @Test
+    void testInvalidPassword_Null() {
+        String nullPassword = null;
+        assertThrows(ValidationException.class, () -> userValidator.validatePassword(nullPassword));
+    }
+
+  
+
+    @Test
+    void testInvalidPassword_TooShort() {
+        String shortPassword = "Short1";
+        assertThrows(ValidationException.class, () -> userValidator.validatePassword(shortPassword));
+    }
+
+    @Test
+    void testInvalidProfilePic_Null() {
+        String nullProfilePic = null;
+        assertThrows(ValidationException.class, () -> userValidator.validateProfilePic(nullProfilePic));
+    }
+
+
+
+    @Test
+    void testInvalidUserId_Negative() {
+        Long negativeUserId = -12345L;
+        assertThrows(ValidationException.class, () -> userValidator.validateUserId(negativeUserId));
+    }
+
    
 }
