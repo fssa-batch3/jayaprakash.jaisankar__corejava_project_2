@@ -2,9 +2,9 @@ package com.fssa.projectprovision.validation;
 
 
 import com.fssa.projectprovision.exception.ValidationException;
+
 import com.fssa.projectprovision.model.Task;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
@@ -202,12 +202,12 @@ public class TaskValidator {
         }
     } 
 
-    
+     
     /**
-     * Validates the todo ID.
+     * Validates the  ID.
      * 
-     * @param todoId The todo ID to validate.
-     * @throws ValidationException If the todo ID is empty or has invalid format.
+     * @param  The  ID to validate.
+     * @throws ValidationException If the ID is empty or has invalid format.
      */
     private static void validateTodoId(String todoId) throws ValidationException {
         if (todoId == null || todoId.trim().isEmpty()) {
