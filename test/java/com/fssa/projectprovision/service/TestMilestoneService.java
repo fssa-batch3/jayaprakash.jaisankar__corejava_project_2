@@ -71,13 +71,8 @@ public class TestMilestoneService {
 
     @Test
     void testGetAllMilestones() {
-        try {
-            List<Milestone> fetchedMilestones = milestoneService.getAllMilestones();
-            assertNotNull(fetchedMilestones);
-        } catch (ServiceException | DAOException e) {
-            e.printStackTrace();
-            fail("Should not throw ServiceException or DAOException");
-        }
+        List<Milestone> fetchedMilestones = milestoneService.getAllMilestones();
+		assertNotNull(fetchedMilestones);
     }
 
     @Test
