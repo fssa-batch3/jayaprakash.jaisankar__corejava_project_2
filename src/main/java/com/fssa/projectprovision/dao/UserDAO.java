@@ -174,7 +174,6 @@
 	        }
 
 	        if (userToDelete.isDeleted()) {
-	            // Handle the case when the user is already marked as deleted
 	            return false;
 	        }
 
@@ -192,32 +191,7 @@
 	    }
 	    
 	    
-//	
-//	    public static boolean deleteUserByEmail(String email) throws DAOException {
-//	        User userToDelete = getUserByEmail(email);
-//	
-//	        if (userToDelete == null) {
-//	            throw new DAOException("User with email " + email + " not found.");
-//	        }
-//	
-//	        if (!userToDelete.isActive()) {
-//	            // Handle the case when the user is already inactive
-//	            return false;
-//	        }
-//	
-//	        String query = "UPDATE users SET mytodos = ?, profile_pic = NULL WHERE email = ?";
-//	        try (Connection connection = ConnectionUtil.getConnection();
-//	             PreparedStatement pst = connection.prepareStatement(query)) {
-//	
-//	            pst.setString(1, null);
-//	            pst.setString(2, email);
-//	
-//	            int rowsAffected = pst.executeUpdate();
-//	            return rowsAffected > 0;
-//	        } catch (SQLException e) {
-//	            throw new DAOException(e);
-//	        }
-//	    }
+
 	    
 	    
 	    /**

@@ -33,6 +33,13 @@ public class TaskDAO {
 	 * This class is responsible for creating, retrieving, updating, and deleting tasks.
 	 *
 	 */
+	
+	   /**
+     * Constructs a new TaskDAO object.
+     * 
+     * <p>This constructor is intentionally empty because the TaskDAO class does not
+     * require any specific initialization or setup in the constructor.
+     */
     public TaskDAO() {
     }
  

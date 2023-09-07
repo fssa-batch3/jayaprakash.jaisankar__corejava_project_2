@@ -77,9 +77,7 @@ public class MilestoneService {
      * @throws DAO Exception If there's an issue with the data access operation.
      */
 
-    public List<Milestone> getAllMilestones() throws ServiceException, DAOException {
-        return milestoneDAO.getAllMilestones();
-    }
+
 
     /**
      * Sets the MilestoneDAO for the service.
@@ -101,6 +99,11 @@ public class MilestoneService {
 
 	public Milestone getMilestoneById(int milestoneId) {
 
+		return null;
+	}
+
+
+	public List<Milestone> getAllMilestones() {
 		return null;
 	}
 }

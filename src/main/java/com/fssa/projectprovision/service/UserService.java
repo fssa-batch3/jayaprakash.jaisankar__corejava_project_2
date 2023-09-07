@@ -201,5 +201,12 @@ public class UserService {
 
 
 
+	public User getUserByEmailIncludingDeleted(String emailToDelete) {
+		
+		return null;
+	}
+
+
+
 
 }

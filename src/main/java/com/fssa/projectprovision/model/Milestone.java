@@ -115,37 +115,7 @@ public class Milestone {
     }
 
 
-	public void setUserId1(int int1) {
 
-		
-	}
-
-	public void setTaskDetails(String string) {
-	
-		
-	}
-
-	public void setMilestone(Milestone milestone) {
-		
-		
-	}
-
-
-
-	public void setUserId(int int1) {
-	
-		
-	}
-
-	public void setUserId11(int int1) {
-	
-		
-	}
-
-	public void setTaskDate1(Date date) {
-	
-		
-	} 
 
 	public int gettasks_id() {
 	
