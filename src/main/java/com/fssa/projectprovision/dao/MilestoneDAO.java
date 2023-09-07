@@ -141,9 +141,9 @@ public class MilestoneDAO {
     
 
     /**
-     * Deletes Milestone records associated with a given ToDo ID from the database.
+     * Deletes Milestone records associated with a given ID from the database.
      *
-     * @param tasks_id The ToDo ID for which Milestone records should be deleted.
+     * @param tasks_id The ID for which Milestone records should be deleted.
      * @return True if the deletion was successful, false otherwise.
      */
 
