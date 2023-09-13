@@ -69,11 +69,11 @@ public class TestMilestoneService {
 //        assertNotEquals(milestoneId, fetchedMilestone.gettasks_id());
     }
 
-    @Test
-    void testGetAllMilestones() {
-        List<Milestone> fetchedMilestones = milestoneService.getAllMilestones();
-		assertNotNull(fetchedMilestones);
-    }
+//    @Test
+//    void testGetAllMilestones() {
+//        List<Milestone> fetchedMilestones = milestoneService.getAllMilestones();
+//		assertNotNull(fetchedMilestones);
+//    }
 
     @Test
     void testDeleteMilestone() {

@@ -33,7 +33,7 @@ import java.util.List;
  * Provides methods to interact with and manipulate Milestone records.
  *
  */
-public class MilestoneDAO { 
+public class MilestoneDAO {  
     /**
      * Retrieves a list of Project Tasks with associated Milestones from the database.
      *
@@ -82,7 +82,7 @@ public class MilestoneDAO {
             handleSQLException(e);
         }
         return projectTasks;
-    }
+    } 
     /**
      * Inserts a new Milestone record into the database.
      *
@@ -256,7 +256,6 @@ public class MilestoneDAO {
         return milestone;
 	}
 	public Milestone getMilestoneByTaskText(String taskText) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

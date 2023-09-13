@@ -168,7 +168,7 @@
 	    
 	    public static boolean deleteUserByEmail(String email) throws DAOException {
 	        User userToDelete = getUserByEmail(email);
-
+ 
 	        if (userToDelete == null) {
 	            throw new DAOException("User with email " + email + " not found.");
 	        }

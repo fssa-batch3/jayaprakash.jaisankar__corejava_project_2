@@ -33,14 +33,14 @@ public class Milestone {
      * @param taskTime   The time of the task.
      * @param isRemainder Whether the task has a reminder.
      */
-    public Milestone(int id,int taskId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
-    	 this.id = id;
-        this.taskText = taskText;
-        this.taskDate = taskDate;
-        this.taskTime = taskTime;
-        this.isRemainder = isRemainder;
-    }
-    
+//    public Milestone(int id,int taskId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
+//    	 this.id = id;
+//        this.taskText = taskText;
+//        this.taskDate = taskDate;
+//        this.taskTime = taskTime;
+//        this.isRemainder = isRemainder;
+//    }
+     
     public Milestone(int taskId, String taskText, LocalDate taskDate, LocalTime taskTime, boolean isRemainder) {
     	this.tasks_id = taskId;
        this.taskText = taskText;

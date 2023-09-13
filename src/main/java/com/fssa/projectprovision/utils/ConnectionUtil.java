@@ -33,7 +33,7 @@ public class ConnectionUtil {
     private ConnectionUtil() {
         // Private constructor to prevent instantiation
     }
-
+ 
     
     /**
      * Establishes a database connection using environment variables for database configuration.

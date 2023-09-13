@@ -39,7 +39,7 @@ public class UserService {
             if (existingUser != null && existingUser.isActive()) {
                 throw new ServiceException("Email id " + user.getEmail() + " is already registered");
             }
-            
+             
             if (UserDAO.createUser(user)) {
                 return "Registration Successful";
             } else {
