@@ -157,6 +157,20 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    /**
+     * Retrieves a user by their user ID.
+     *
+     * @param userId The user's ID as a Long.
+     * @return The retrieved user, or null if not found.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public User getUserById(Long userId) throws ServiceException {
+        try {
+            return UserDAO.getUserById(userId);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 
 
     /**

@@ -82,7 +82,36 @@ public class MilestoneDAO {
             handleSQLException(e);
         }
         return projectTasks;
-    } 
+    }
+    /**
+     * Retrieves a list of Milestone records where two IDs are equal.
+     *
+     * @return A list of Milestone objects if found, or an empty list if not found.
+     */
+    public List<Milestone> getMilestonesWithEqualIds() {
+        List<Milestone> milestones = new ArrayList<>();
+        String query = "SELECT pt.*, t.id AS milestoneid, t.* " +
+                       "FROM tasks pt " +
+                       "INNER JOIN milestone t ON pt.id = t.tasks_id " +
+                       "WHERE pt.id = t.tasks_id"; 
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                Milestone milestone = buildMilestoneFromResultSet(rs);
+                milestones.add(milestone);
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
+        }
+        return milestones;
+    }
+
+    
+  
+
     /**
      * Inserts a new Milestone record into the database.
      *

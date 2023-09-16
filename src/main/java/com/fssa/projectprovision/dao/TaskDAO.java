@@ -101,6 +101,7 @@ public class TaskDAO {
     }
     
     
+    
     /**
      * Retrieves a task from the database based on the provided task ID.
      *
@@ -129,6 +130,34 @@ public class TaskDAO {
     }
 
    
+    /**
+     * Retrieves a list of tasks by the assignee's email from the database.
+     *
+     * @param assigneeEmail The assignee's email to search for.
+     * @return A List of Task objects representing tasks assigned to the specified email.
+     * @throws DAOException If there's an issue with the database operation.
+     */
+    public List<Task> getTasksByAssigneeEmail(String assigneeEmail) throws DAOException {
+        List<Task> taskList = new ArrayList<>();
+        String query = "SELECT * FROM tasks WHERE taskassignee = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setString(1, assigneeEmail);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Task task = buildTaskFromResultSet(rs);
+                    taskList.add(task);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return taskList;
+    }
+
 
  
     

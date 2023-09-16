@@ -89,6 +89,38 @@ public class MilestoneService {
         this.milestoneDAO = milestoneDAO;
     }
 
+    
+    /**
+     * Retrieves a milestone by its ID.
+     * 
+     * @param milestoneId The ID of the milestone to retrieve.
+     * @return The retrieved milestone, or null if not found.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public Milestone getMilestoneById1(int milestoneId) throws ServiceException {
+        return milestoneDAO.getMilestoneById(milestoneId);
+    }
+
+    /**
+     * Retrieves a list of Milestone records where two IDs are equal.
+     *
+     * @return A list of Milestone objects if found, or an empty list if not found.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public List<Milestone> getMilestonesWithEqualIds() throws ServiceException {
+        return milestoneDAO.getMilestonesWithEqualIds();
+    }
+    
+    /**
+     * Retrieves a list of all milestones in the system.
+     * 
+     * @return A list of all milestones in the system.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public List<Milestone> getAllMilestones1() throws ServiceException {
+        return milestoneDAO.getAllMilestones();
+    }
+
 
     /**
      * Retrieves a milestone by its ID.

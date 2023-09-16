@@ -50,20 +50,8 @@ public class User {
      * @param userId The user's unique identifier.
      * @param isDeleted Flag indicating if the user is deleted.
      */
-    public User(
-    	    String name,
-    	    String gender,
-    	    String mobileNumber,
-    	    LocalDate dateOfBirth,
-    	    String address,
-    	    String aboutMe,
-    	    String email,
-    	    String password,
-    	    String profilePic,
-    	    String myTodos,
-    	    long userId,
-    	    boolean someBoolean
-    	) {
+    public User(String name, String gender, String mobileNumber, LocalDate dateOfBirth, String address, String aboutMe,
+            String email, String password, String profilePic, String myTodos, long userId, boolean isDeleted) {
         this.name = name;
         this.gender = gender;
         this.mobileNumber = mobileNumber;
@@ -77,6 +65,7 @@ public class User {
         this.userId = userId;
         this.isDeleted = isDeleted;
     }
+
 
     
     /**
@@ -218,5 +207,4 @@ public class User {
 	}
 
 	
-}
-
+}	

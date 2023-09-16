@@ -191,7 +191,34 @@
 	    }
 	    
 	    
+	    /**
+	     * Retrieves a user's data from the database based on the provided user ID.
+	     *
+	     * @param userId The ID of the user to be retrieved.
+	     * @return The User object containing the user's information, or null if not found.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
+	    public static User getUserById(long userId) throws DAOException {
+	        User user = null;
+	        String query = "SELECT id, name, gender, mobile_number, date_of_birth, address, about_me, email, " +
+	                "password, profile_pic, mytodos, user_id " +
+	                "FROM users WHERE user_id = ?";
+	        try (Connection connection = ConnectionUtil.getConnection();
+	             PreparedStatement pst = connection.prepareStatement(query)) {
 
+	            pst.setLong(1, userId);
+
+	            try (ResultSet rs = pst.executeQuery()) {
+	                if (rs.next()) {
+	                    user = buildUserFromResultSet(rs);
+	                }
+	            }
+
+	        } catch (SQLException e) {
+	            throw new DAOException(e);
+	        }
+	        return user;
+	    }
 	    
 	    
 	    /**

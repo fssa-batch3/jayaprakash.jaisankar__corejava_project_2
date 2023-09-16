@@ -156,6 +156,22 @@ public class TaskService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * Retrieves a list of tasks by the assignee's email.
+	 *
+	 * @param assigneeEmail The assignee's email to search for.
+	 * @return A list of tasks assigned to the specified email.
+	 * @throws ServiceException If there's an issue with the service operation.
+	 */
+	public List<Task> getTasksByAssigneeEmail(String assigneeEmail) throws ServiceException {
+	    try {
+	        return taskDAO.getTasksByAssigneeEmail(assigneeEmail);
+	    } catch (DAOException e) {
+	        throw new ServiceException("Failed to retrieve tasks by assignee's email", e);
+	    }
+	}
+
 
 	public List<Task> getFilteredAndSortedTasks(String sortCriteria, String filterCriteria, String searchKeyword) throws ServiceException {
 	    try {
@@ -164,32 +180,58 @@ public class TaskService {
 
 	        if ("Based On Category".equals(filterCriteria)) {
 	            for (Task task : allTasks) {
-	                if (task.getCategory().equalsIgnoreCase(searchKeyword)) {
+	                if (task.getTaskCategory().equalsIgnoreCase(searchKeyword)) {
 	                    filteredAndSortedTasks.add(task);
 	                }
 	            }
-	        }
-
-//	        if ("Based On Due date".equals(sortCriteria)) {
-//	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getDueDate));
-//	        }
-
-
-	        if (searchKeyword != null && !searchKeyword.isEmpty()) {
-	            List<Task> searchResults = new ArrayList<>();
-	            for (Task task : filteredAndSortedTasks) {
-	                // Replace this line with your custom search logic based on your Task class
-	                if (task.getDescription().toLowerCase().contains(searchKeyword.toLowerCase())) {
-	                    searchResults.add(task);
+	        } else if ("Based On Assignee".equals(filterCriteria)) {
+	            for (Task task : allTasks) {
+	                if (task.getTaskAssignee().equalsIgnoreCase(searchKeyword)) {
+	                    filteredAndSortedTasks.add(task);
 	                }
 	            }
-	            return searchResults;
+	        } else if ("Based On Status".equals(filterCriteria)) {
+	            for (Task task : allTasks) {
+	                if (task.getTaskStatus().equalsIgnoreCase(searchKeyword)) {
+	                    filteredAndSortedTasks.add(task);
+	                }
+	            }
+	        } else if ("Based On Priority".equals(filterCriteria)) {
+	            for (Task task : allTasks) {
+	                if (task.getTaskPriority().equalsIgnoreCase(searchKeyword)) {
+	                    filteredAndSortedTasks.add(task);
+	                }
+	            }
+	        } else if ("Based On Tags".equals(filterCriteria)) {
+	            for (Task task : allTasks) {
+	                if (task.getTaskTags().equalsIgnoreCase(searchKeyword)) {
+	                    filteredAndSortedTasks.add(task);
+	                }
+	            }
+	        } else {
+	            filteredAndSortedTasks.addAll(allTasks);
+	        }
+
+	        if ("Based On Due date".equals(sortCriteria)) {
+	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getTaskDue));
+	        } else if ("A-Z (Ascending Order)".equals(sortCriteria)) {
+	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getTaskName));
+	        } else if ("Z-A (Descending Order)".equals(sortCriteria)) {
+	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getTaskName).reversed());
 	        }
 
 	        return filteredAndSortedTasks;
 	    } catch (DAOException e) {
 	        throw new ServiceException("Failed to retrieve filtered and sorted tasks", e);
 	    }
+	
+
+//	        if ("Based On Due date".equals(sortCriteria)) {
+//	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getDueDate));
+//	        }
+
+
+	      
 	}
 
 

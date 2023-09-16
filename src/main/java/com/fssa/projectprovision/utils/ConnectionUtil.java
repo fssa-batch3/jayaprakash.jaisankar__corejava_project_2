@@ -42,10 +42,31 @@ public class ConnectionUtil {
      * @throws RuntimeException If there's an issue with database driver loading or connection.
      */
     
+    
+    
+//    public static Connection getConnection() {
+//        final String dbUrl = System.getenv("DB_URL");
+//        final String dbUser = System.getenv("DB_USER");
+//        final String dbPassword = System.getenv("DB_PASSWORD");
+//
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException("Database Driver class Not found", e);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Unable to Connect to Database", e);
+//        }
+//    }
     public static Connection getConnection() {
-        final String dbUrl = System.getenv("DB_URL");
-        final String dbUser = System.getenv("DB_USER");
-        final String dbPassword = System.getenv("DB_PASSWORD");
+//        final String dbUrl = System.getenv("local_url");
+//        final String dbUser = System.getenv("local_username");
+//        final String dbPassword = System.getenv("local_password");
+//        
+        
+      final String dbUrl = System.getenv("DB_URL");
+      final String dbUser = System.getenv("DB_USER");
+      final String dbPassword = System.getenv("DB_PASSWORD");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
