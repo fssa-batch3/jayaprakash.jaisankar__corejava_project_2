@@ -248,6 +248,25 @@
 	        }
 	    }
 	    
+	    
+	    public static String getTaskAssigneeByEmail(String email) throws DAOException {
+	        String query = "SELECT email FROM users WHERE email = ?";
+	        try (Connection connection = ConnectionUtil.getConnection();
+	             PreparedStatement pst = connection.prepareStatement(query)) {
+
+	            pst.setString(1, email);
+
+	            try (ResultSet rs = pst.executeQuery()) {
+	                if (rs.next()) {
+	                    return rs.getString("email");
+	                }
+	                return null; // Return null if no taskAssignee is found
+	            }
+
+	        } catch (SQLException e) {
+	            throw new DAOException(e);
+	        }
+	    }
 	    /**
 	     * Constructs a User object from the ResultSet containing user information.
 	     *

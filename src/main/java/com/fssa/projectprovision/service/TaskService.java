@@ -51,16 +51,31 @@ public class TaskService {
      */
      
     
-    public boolean createTask(Task task) throws ServiceException {
-    	boolean result = false;
-    	try {
+    public boolean createTask(Task task, Long userId) throws ServiceException {
+        boolean result = false;
+        try {
             TaskValidator.validateTask(task);
-            result = taskDAO.createTask(task);
+            result = taskDAO.createTask(task, userId);
         } catch (DAOException | ValidationException e) {
             throw new ServiceException("Failed to create first task", e);
         }
         return result;
-    } 
+    }
+
+    /**
+     * Retrieves a list of tasks for a specific user by their user ID.
+     * 
+     * @param userId The ID of the user for whom tasks are retrieved.
+     * @return A list of tasks assigned to the specified user.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public List<Task> getTasksForUser(Long userId, String taskAssignee) throws ServiceException {
+        try {
+            return taskDAO.getTasksForUser(userId, taskAssignee);
+        } catch (DAOException e) {
+            throw new ServiceException("Failed to retrieve tasks for user", e);
+        }
+    }
 
 
     
@@ -116,6 +131,19 @@ public class TaskService {
             }
         } catch (DAOException | ValidationException e) {
             throw new ServiceException("Failed to update task", e);
+        }
+    }
+    
+    public String markTaskAsCompleted(int taskId) throws ServiceException {
+        try {
+            boolean result = taskDAO.markTaskAsCompleted(taskId);
+            if (result) {
+                return "Task Marked as Completed Successfully";
+            } else {
+                return "Failed to Mark Task as Completed";
+            }
+        } catch (DAOException e) {
+            throw new ServiceException("Failed to mark task as completed", e);
         }
     }
     

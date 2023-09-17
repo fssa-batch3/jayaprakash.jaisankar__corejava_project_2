@@ -47,13 +47,14 @@ public class TaskDAO {
     /**
      * Creates a new task in the database.
      *
-     * @param task The Task object containing the task information to be created.
+     * @param task  The Task object containing the task information to be created.
+     * @param userId The user ID of the task creator.
      * @return True if the task creation was successful, false otherwise.
      * @throws DAOException If there's an issue with the database operation.
      */
-    public boolean createTask(Task task) throws DAOException {
-        String query = "INSERT INTO tasks (taskname, taskdetails, taskcategory, taskdue, taskassignee, taskstatus,projectname, taskpriority, tasktags, todoID) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean createTask(Task task, Long userId) throws DAOException {
+        String query = "INSERT INTO tasks (taskname, taskdetails, taskcategory, taskdue, taskassignee, taskstatus, projectname, taskpriority, tasktags, todoID, user_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
@@ -67,15 +68,16 @@ public class TaskDAO {
             pst.setString(8, task.getTaskPriority());
             pst.setString(9, task.getTaskTags());
             pst.setString(10, task.getTodoId());
+            pst.setLong(11, userId); // Set the creatorId as a Long
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
- 
+
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
-  
+
     
     /**
      * Retrieves a list of all tasks from the database.
@@ -218,7 +220,41 @@ public class TaskDAO {
             throw new DAOException(e);
         }
     }
- 
+    
+    public List<Task> getTasksForUser(Long userId, String taskAssignee) throws DAOException {
+        String query = "SELECT * FROM tasks WHERE (user_id = ? OR taskassignee = ?)";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setLong(1, userId);
+            pst.setString(2, taskAssignee);
+            ResultSet rs = pst.executeQuery();
+
+            List<Task> tasks = new ArrayList<>();
+            while (rs.next()) {
+                Task task = buildTaskFromResultSet(rs);
+                tasks.add(task);
+            }
+            return tasks;
+        } catch (SQLException e) {
+            throw new DAOException("Error while retrieving tasks for user", e);
+        }
+    }
+
+    
+    public boolean markTaskAsCompleted(int taskId) throws DAOException {
+        String query = "UPDATE tasks SET taskstatus = 'Completed' WHERE id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setInt(1, taskId);
+
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
     
     /**
      * Constructs a Task object from the ResultSet containing task information.

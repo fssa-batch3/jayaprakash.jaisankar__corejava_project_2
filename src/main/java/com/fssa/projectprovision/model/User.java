@@ -26,6 +26,7 @@ public class User {
     private String profilePic;
     private String myTodos; // Represent JSON as a String
     private long userId;
+    private String taskAssignee; 
     private boolean isDeleted;
 
     /**
@@ -194,7 +195,14 @@ public class User {
         this.userId = userId;
     }
 
-	
+    public String getTaskAssignee() {
+        return taskAssignee;
+    }
+
+    // Setter for taskAssignee
+    public void setTaskAssignee(String taskAssignee) {
+        this.taskAssignee = taskAssignee;
+    }
 
 	public void setDateOfBirth(Date valueOf) {
 

@@ -72,6 +72,9 @@ public class UserService {
             }
             User fromDb = UserDAO.getUserByEmail(user.getEmail());
             if (fromDb != null && user.getPassword().equals(fromDb.getPassword())) {
+                // Fetch the taskAssignee from the database and set it in the User object
+                String taskAssignee = UserDAO.getTaskAssigneeByEmail(user.getEmail());
+                fromDb.setTaskAssignee(taskAssignee);
                 return fromDb;
             } else {
                 throw new ServiceException("User Not Found");

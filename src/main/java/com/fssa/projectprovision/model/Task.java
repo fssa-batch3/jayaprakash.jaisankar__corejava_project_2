@@ -26,6 +26,8 @@ public class Task {
     private String taskPriority;
     private String taskTags;
     private String todoId;
+    private Long creatorId;
+    private String assignee;
 
     
     /**
@@ -174,6 +176,10 @@ public class Task {
     public void setCategory(String category) {
         this.category = category;
     }
+    public boolean isAssignee(String taskAssignee) {
+        return this.taskAssignee.equals(taskAssignee);
+    }
+
 
     /**
      * Returns a string representation of the Task object.
@@ -196,4 +202,9 @@ public class Task {
                 ", todoId='" + todoId + '\'' +
                 '}';
     }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
+
 }
