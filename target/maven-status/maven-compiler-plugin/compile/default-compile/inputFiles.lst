@@ -1,4 +1,5 @@
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\validation\TaskValidator.java
+C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\service\PersonalTaskService.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\dao\TaskDAO.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\utils\ConnectionUtil.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\validation\UserValidator.java
@@ -7,9 +8,11 @@ C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\service\MilestoneService.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\dao\UserDAO.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\exception\ValidationException.java
+C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\model\PersonalTask.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\model\Milestone.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\service\RegisterService.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\service\UserService.java
+C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\dao\PersonalTaskDAO.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\validation\MilestoneValidator.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\exception\ServiceException.java
 C:\Users\JayaprakashJaisankar\eclipse-workspace\jayaprakash.jaisankar__corejava_project_2\src\main\java\com\fssa\projectprovision\utils\ResultSetUtil.java

@@ -101,6 +101,11 @@
 	        }
 	        return user;
 	    }
+	    
+	    
+	    
+	    
+	    
 	    /**
 	     * Retrieves a list of all users' data from the database.
 	     *
@@ -166,29 +171,21 @@
 	      * @throws DAOException If there's an issue with the database operation.
 	      */
 	    
-	    public static boolean deleteUserByEmail(String email) throws DAOException {
-	        User userToDelete = getUserByEmail(email);
- 
-	        if (userToDelete == null) {
-	            throw new DAOException("User with email " + email + " not found.");
-	        }
+	     public static boolean deleteUserByEmail(String email) throws DAOException {
+	    	    String query = "DELETE FROM users WHERE email = ?";
+	    	    try (Connection connection = ConnectionUtil.getConnection();
+	    	         PreparedStatement pst = connection.prepareStatement(query)) {
 
-	        if (userToDelete.isDeleted()) {
-	            return false;
-	        }
+	    	        pst.setString(1, email);
 
-	        String query = "UPDATE users SET mytodos = NULL, profile_pic = NULL, isDeleted = true WHERE email = ?";
-	        try (Connection connection = ConnectionUtil.getConnection();
-	             PreparedStatement pst = connection.prepareStatement(query)) {
+	    	        int rowsAffected = pst.executeUpdate();
 
-	            pst.setString(1, email);
+	    	        return rowsAffected > 0;
+	    	    } catch (SQLException e) {
+	    	        throw new DAOException(e);
+	    	    }
+	    	}
 
-	            int rowsAffected = pst.executeUpdate();
-	            return rowsAffected > 0;
-	        } catch (SQLException e) {
-	            throw new DAOException(e);
-	        }
-	    }
 	    
 	    
 	    /**
@@ -267,6 +264,30 @@
 	            throw new DAOException(e);
 	        }
 	    }
+	    
+	    /**
+	     * Deletes a user from the database based on the provided user ID.
+	     *
+	     * @param userId The ID of the user to be deleted.
+	     * @return True if the user deletion was successful, false otherwise.
+	     * @throws DAOException If there's an issue with the database operation.
+	     */
+	    public static boolean deleteUserById(long userId) throws DAOException {
+	        String query = "DELETE FROM users WHERE user_id = ?";
+	        try (Connection connection = ConnectionUtil.getConnection();
+	             PreparedStatement pst = connection.prepareStatement(query)) {
+
+	            pst.setLong(1, userId);
+
+	            int rowsAffected = pst.executeUpdate();
+
+	            return rowsAffected > 0;
+	        } catch (SQLException e) {
+	            throw new DAOException(e);
+	        }
+	    }
+
+	    
 	    /**
 	     * Constructs a User object from the ResultSet containing user information.
 	     *
