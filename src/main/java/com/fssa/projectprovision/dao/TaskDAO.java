@@ -256,6 +256,38 @@ public class TaskDAO {
         }
     }
     
+    
+    /**
+     * Retrieves a list of tasks from the database based on the provided task priority.
+     *
+     * @param taskPriority The priority of tasks to be retrieved.
+     * @return A List of Task objects representing tasks with the specified priority.
+     * @throws DAOException If there's an issue with the database operation.
+     */
+    public List<Task> getTasksByPriority(String taskPriority) throws DAOException {
+        List<Task> taskList = new ArrayList<>();
+        String query = "SELECT * FROM tasks WHERE taskpriority = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setString(1, taskPriority);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Task task = buildTaskFromResultSet(rs);
+                    taskList.add(task);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return taskList;
+    }
+
+    
+    
+    
     /**
      * Constructs a Task object from the ResultSet containing task information.
      *

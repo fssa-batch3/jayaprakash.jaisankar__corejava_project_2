@@ -251,7 +251,7 @@ public class UserValidator {
      * Placeholder method for validating an ID.
      * 
      * @param validId The ID to validate.
-     * @return A BooleanSupplier object (implementation not provided).
+     * @return A BooleanSupplier object (implemenatation not provided).
      */
 
 	public BooleanSupplier validateId(int validId) {

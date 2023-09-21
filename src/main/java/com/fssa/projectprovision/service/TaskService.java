@@ -236,6 +236,25 @@ public class TaskService {
 	        throw new ServiceException("Failed to retrieve tasks for the specified date", e);
 	    }
 	}
+	
+	
+	
+	
+	/**
+	 * Retrieves a list of tasks from the database based on the provided task priority.
+	 *
+	 * @param taskPriority The priority of tasks to be retrieved.
+	 * @return A List of Task objects representing tasks with the specified priority.
+	 * @throws ServiceException If there's an issue with the service operation.
+	 */
+	public List<Task> getTasksByPriority(String taskPriority) throws ServiceException {
+	    try {
+	        return taskDAO.getTasksByPriority(taskPriority); // Call the corresponding DAO method
+	    } catch (DAOException e) {
+	        throw new ServiceException("Failed to retrieve tasks by priority", e);
+	    }
+	}
+
 
 	public List<Task> getFilteredAndSortedTasks(String sortCriteria, String filterCriteria, String searchKeyword) throws ServiceException {
 	    try {
@@ -290,9 +309,7 @@ public class TaskService {
 	    }
 	
 
-//	        if ("Based On Due date".equals(sortCriteria)) {
-//	            Collections.sort(filteredAndSortedTasks, Comparator.comparing(Task::getDueDate));
-//	        }
+
 
 
 	      
