@@ -9,13 +9,16 @@ import java.time.LocalTime;
  * 
  * @author JayaprakashJaisankar
  */
-public class Milestone {
+public class Milestone {	
 	 private int id;
     private int tasks_id;
     private String taskText;
     private LocalDate taskDate;
     private LocalTime taskTime;
     private boolean isRemainder;
+    private long user_id;
+    private String taskAssignee;
+    private long creatorId;
 
     /**
      * Default constructor for creating a Milestone object.
@@ -47,7 +50,25 @@ public class Milestone {
        this.taskDate = taskDate;
        this.taskTime = taskTime;
        this.isRemainder = isRemainder;
+       this.user_id = user_id;
+       this.taskAssignee = taskAssignee;
    }
+    
+    
+    public String getTaskAssignee() {
+        return taskAssignee;
+    }
+
+    public void setTaskAssignee(String taskAssignee) {
+        this.taskAssignee = taskAssignee;
+    }
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
+    }
     public int getId() {
         return id;
     } 
@@ -97,6 +118,14 @@ public class Milestone {
         this.isRemainder = isRemainder;
     }
 
+    
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
     /**
      * Returns a string representation of the Milestone object.
      *

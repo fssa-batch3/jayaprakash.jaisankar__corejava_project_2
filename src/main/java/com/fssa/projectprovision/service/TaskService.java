@@ -3,17 +3,24 @@ package com.fssa.projectprovision.service;
 import com.fssa.projectprovision.dao.TaskDAO;
 
 
+
 import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.exception.ValidationException;
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.validation.TaskValidator;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 
-import java.util.List;
 
 /**
  * A service class that provides methods for managing tasks in the system.
@@ -200,6 +207,35 @@ public class TaskService {
 	    }
 	}
 
+    /**
+     * Retrieves a list of tasks for a specific date.
+     *
+     * @param date The date for which to retrieve tasks.
+     * @return A list of tasks due on the specified date.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+	public List<Task> getTasksForDate(String date) throws ServiceException {
+	    try {
+	        // Check if the date parameter is null or empty
+	        if (date == null || date.isEmpty()) {
+	            throw new ServiceException("Date parameter is missing or empty");
+	        }
+
+	        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDate targetDate = LocalDate.parse(date, dateFormat);
+
+	        // Get all tasks and filter by the specified date
+	        List<Task> allTasks = taskDAO.getAllTasks();
+	        return allTasks.stream()
+	                .filter(task -> {
+	                    LocalDate taskDueDate = task.getTaskDue();
+	                    return taskDueDate != null && taskDueDate.equals(targetDate);
+	                })
+	                .collect(Collectors.toList());
+	    } catch (Exception e) {
+	        throw new ServiceException("Failed to retrieve tasks for the specified date", e);
+	    }
+	}
 
 	public List<Task> getFilteredAndSortedTasks(String sortCriteria, String filterCriteria, String searchKeyword) throws ServiceException {
 	    try {

@@ -28,6 +28,12 @@ public class MilestoneService {
     }
 
     
+    public List<Milestone> getMilestonesByTaskId(int taskId) throws ServiceException {
+        return milestoneDAO.getMilestonesByTaskId(taskId);
+    }
+
+
+    
     /**
      * Inserts a new milestone into the system.
      * 
@@ -35,9 +41,35 @@ public class MilestoneService {
      * @return True if the insertion is successful, false otherwise.
      * @throws ServiceException If there's an issue with the service operation.
      */
-    public boolean insertMilestone(Milestone milestone) throws ServiceException {
-        return milestoneDAO.insertMilestone(milestone);
+    public boolean insertMilestone(Milestone milestone, long userId, String taskAssignee) {
+        return milestoneDAO.insertMilestone(milestone, userId, taskAssignee);
     }
+    /**
+     * Retrieves a list of Project Tasks with associated Milestones for a specific user and task assignee.
+     *
+     * @param userId      The ID of the user.
+     * @param taskAssignee The task assignee to filter by.
+     * @return A list of Milestone objects representing Project Tasks with Milestones.
+     * @throws ServiceException If there's an issue with the service operation.
+     */
+    public List<Milestone> getProjectTasksWithMilestones(long userId) throws ServiceException {
+        return milestoneDAO.getProjectTasksWithMilestones(userId);
+    }
+    
+    public List<Milestone> getCreatorIdForMilestone(long userId) throws ServiceException {
+        return milestoneDAO.getProjectTasksWithMilestones(userId);
+    }
+    /**
+     * Retrieves the creator ID of a milestone based on its ID.
+     *
+     * @param milestoneId The ID of the milestone.
+     * @return The creator ID of the milestone, or -1 if the milestone doesn't exist.
+     * @throws ServiceException If there's an issue with the service operation.
+     */				
+    public long getCreatorId(Long milestoneId) throws ServiceException {
+        return milestoneDAO.getCreatorId(milestoneId);
+    }
+
 
     
     /**
@@ -97,9 +129,9 @@ public class MilestoneService {
      * @return The retrieved milestone, or null if not found.
      * @throws ServiceException If there's an issue with the service operation.
      */
-    public Milestone getMilestoneById1(int milestoneId) throws ServiceException {
-        return milestoneDAO.getMilestoneById(milestoneId);
-    }
+//    public Milestone getMilestoneById1(int milestoneId) throws ServiceException {
+//        return milestoneDAO.getMilestoneById(milestoneId);
+//    }
 
     /**
      * Retrieves a list of Milestone records where two IDs are equal.

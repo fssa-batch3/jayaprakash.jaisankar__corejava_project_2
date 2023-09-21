@@ -83,6 +83,26 @@ public class MilestoneDAO {
         }
         return projectTasks;
     }
+
+    
+    public long getCreatorId(Long milestoneId) {
+        String query = "SELECT user_id FROM milestone WHERE id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setLong(1, milestoneId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getLong("user_id"); 
+                }
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
+        }
+         return milestoneId; 
+    }
+
     /**
      * Retrieves a list of Milestone records where two IDs are equal.
      *
@@ -118,20 +138,21 @@ public class MilestoneDAO {
      * @param milestone The Milestone object to be inserted.
      * @return True if the insertion was successful, false otherwise.
      */
-    public boolean insertMilestone(Milestone milestone) {
-        String query = "INSERT INTO milestone (task_text, task_date, task_time, is_remainder,tasks_id) " +
-                       "VALUES (?, ?, ?, ?, ?)";
+    public boolean insertMilestone(Milestone milestone, long userId, String taskAssignee) {
+        String query = "INSERT INTO milestone (task_text, task_date, task_time, is_remainder, tasks_id, user_id, taskassignee) " +
+                       "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
-          
             pst.setString(1, milestone.getTaskText());
             pst.setDate(2, Date.valueOf(milestone.getTaskDate()));
             pst.setTime(3, Time.valueOf(milestone.getTaskTime()));
             pst.setBoolean(4, milestone.getIsRemainder());
             pst.setInt(5, milestone.gettasks_id());
+            pst.setLong(6, userId); 
+            pst.setString(7, taskAssignee); 
 
-            int rowsAffected  = pst.executeUpdate();
+            int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
 
         } catch (SQLException e) {
@@ -139,6 +160,37 @@ public class MilestoneDAO {
             return false;
         }
     }
+
+    /**
+     * Retrieves a list of Project Tasks with associated Milestones from the database.
+     *
+     * @return A list of Milestone objects representing Project Tasks with Milestones.
+     */
+    public static List<Milestone> getProjectTasksWithMilestones(long userId) {
+        List<Milestone> projectTasks = new ArrayList<>();
+//        String query = "SELECT pt.*, t.task_text, t.task_date, t.task_time, t.is_remainder " +
+//                "FROM tasks pt " +
+//                "INNER JOIN milestone t ON pt.id = t.tasks_id " +
+//                "WHERE pt.user_id = ? AND t.taskassignee = ?"; 
+        String query = "SELECT * FROM milestone WHERE user_id = ? "; 
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setLong(1, userId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Milestone milestone = buildMilestoneFromResultSet(rs);
+                    projectTasks.add(milestone);
+                }
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
+        }
+        return projectTasks;
+    }
+
     
     /**
      * Updates an existing Milestone record in the database.
@@ -218,6 +270,28 @@ public class MilestoneDAO {
         return milestones;
     }
 
+    
+    public List<Milestone> getMilestonesByTaskId(int taskId) {
+        List<Milestone> milestones = new ArrayList<>();
+        String query = "SELECT * FROM milestone WHERE tasks_id = ?";
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setInt(1, taskId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Milestone milestone = buildMilestoneFromResultSet(rs);
+                    milestones.add(milestone);
+                }
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
+        }
+        return milestones;
+    }
+
 
     /**
      * Builds a Milestone object from a ResultSet.
@@ -229,7 +303,7 @@ public class MilestoneDAO {
     private static Milestone buildMilestoneFromResultSet(ResultSet rs) throws SQLException {
         Milestone milestone = new Milestone();
       
-        //milestone.setUserId(rs.getInt("user_id"));
+        milestone.setCreatorId(rs.getLong("user_id"));
         milestone.setTaskText(rs.getString("task_text"));
         milestone.setTaskDate(rs.getDate("task_date").toLocalDate());
         milestone.setTaskTime(rs.getTime("task_time").toLocalTime());
@@ -257,10 +331,10 @@ public class MilestoneDAO {
 		}
 
 
-		public Milestone getMilestoneById(Milestone id) {
-			return id;
+	////	public Milestone getMilestoneById(Milestone id) {
+		//	return id;
 		   
-		}
+	//	}
 
 	
 	public Milestone getMilestoneById1(Milestone taskId) {
@@ -276,11 +350,11 @@ public class MilestoneDAO {
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    milestone = buildMilestoneFromResultSet(rs);
+                   milestone = buildMilestoneFromResultSet(rs);
                 }
             }
-        } catch (SQLException e) {
-            handleSQLException(e);
+       } catch (SQLException e) {
+           handleSQLException(e);
         }
         return milestone;
 	}

@@ -113,6 +113,27 @@ public class PersonalTaskDAO {
             throw new DAOException(e);
         }
     }
+    
+    public List<PersonalTask> getPersonalTasksByUserId(long userId) throws DAOException {
+        List<PersonalTask> taskList = new ArrayList<>();
+        String query = "SELECT * FROM personaltask WHERE user_id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setLong(1, userId);
+            
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    PersonalTask task = buildPersonalTaskFromResultSet(rs);
+                    taskList.add(task);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return taskList;
+    }
+
 
     private PersonalTask buildPersonalTaskFromResultSet(ResultSet rs) throws SQLException {
         PersonalTask task = new PersonalTask();
