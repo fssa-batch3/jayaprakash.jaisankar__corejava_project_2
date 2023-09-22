@@ -59,14 +59,14 @@ public class ConnectionUtil {
 //        }
 //    }
     public static Connection getConnection() {
-//        final String dbUrl = System.getenv("local_url");
-//        final String dbUser = System.getenv("local_username");
-//        final String dbPassword = System.getenv("local_password");
-//        
+        final String dbUrl = "jdbc:mysql://localhost:3306/jayaprakash_jaisankar_corejava_project";
+        final String dbUser ="root";
+        final String dbPassword = "123456";
         
-      final String dbUrl = System.getenv("DB_URL");
-      final String dbUser = System.getenv("DB_USER");
-      final String dbPassword = System.getenv("DB_PASSWORD");
+        
+//      final String dbUrl = System.getenv("DB_URL");
+//      final String dbUser = System.getenv("DB_USER");
+//      final String dbPassword = System.getenv("DB_PASSWORD");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
