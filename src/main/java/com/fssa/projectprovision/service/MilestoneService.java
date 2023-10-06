@@ -20,7 +20,7 @@ public class MilestoneService {
 
     /**
      * Constructs a MilestoneService with the provided MilestoneDAO.
-     * 
+     *  
      * @param milestoneDAO The data access object for milestones.
      */
     public MilestoneService(MilestoneDAO milestoneDAO) {

@@ -1,6 +1,7 @@
 package com.fssa.projectprovision.service;
 
 import com.fssa.projectprovision.exception.ServiceException;
+
 import com.fssa.projectprovision.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
@@ -98,22 +99,24 @@ class TestUserService {
         assertThrows(ServiceException.class, () -> userService.updateUser(nonExistentUser));
     }
 
-//    @Test
-//    @Order(7)
-//    void testValidDeleteUser() {
-//        try {
-//            String emailToDelete = user.getEmail(); 
-//            boolean isDeleted = userService.deleteUser(emailToDelete);
-//            assertTrue(isDeleted);
-//
-//            // Retrieving the user again should indicate that the user is marked as deleted
-//            User deletedUser = userService.getUserByEmailIncludingDeleted(emailToDelete);
-//            assertNotNull(deletedUser);
-//            assertTrue(deletedUser.isDeleted());
-//        } catch (ServiceException e) {
-//            fail("Should not throw ServiceException");
-//        }
-//    }
+    @Test
+    @Order(7)
+    void testValidDeleteUser() {
+        try {
+            userService.registerUser(user);
+         //   Long userIdToDelete = user.getId();
+            Long userIdToDelete = 1695375277170L;
+            boolean isDeleted = userService.deleteUser(userIdToDelete);
+            assertTrue(isDeleted);
+
+            User deletedUser = userService.getUserById(userIdToDelete);
+            assertNull(deletedUser);
+        } catch (ServiceException e) {
+            fail("Should not throw ServiceException");
+        }
+    }
+
+
 
     @Test
     @Order(8)

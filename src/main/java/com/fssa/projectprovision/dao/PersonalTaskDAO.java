@@ -26,7 +26,7 @@ public class PersonalTaskDAO {
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
 
-            pst.setLong(1, task.getUserId());
+            pst.setLong(1, task.getUserId()); 
             pst.setString(2, task.getTaskName());
             pst.setBoolean(3, task.isRemainder());
             pst.setDate(4, Date.valueOf(task.getTaskDate()));
@@ -34,11 +34,11 @@ public class PersonalTaskDAO {
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
-
+ 
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-    }
+    } 
 
     public List<PersonalTask> getAllPersonalTasks() throws DAOException {
         List<PersonalTask> taskList = new ArrayList<>();

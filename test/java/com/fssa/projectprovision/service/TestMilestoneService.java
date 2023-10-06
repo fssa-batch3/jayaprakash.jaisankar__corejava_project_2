@@ -1,6 +1,7 @@
 package com.fssa.projectprovision.service;
 
 import com.fssa.projectprovision.dao.MilestoneDAO;
+
 import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.Milestone;
@@ -23,9 +24,9 @@ public class TestMilestoneService {
     void setUp() {
         milestoneDAO = new FakeMilestoneDAO();
         milestoneService = new MilestoneService(milestoneDAO);
-    }
+    } 
 
-    @Test
+    @Test 
     void testInsertMilestone() {
         Milestone milestone = new Milestone();
         milestone.setTasks_id(1); 
@@ -35,12 +36,12 @@ public class TestMilestoneService {
         milestone.setIsRemainder(true);
 
         try {
-            assertTrue(milestoneService.insertMilestone(milestone));
+            assertTrue(milestoneService.insertMilestone(milestone, 82,"jayaprakashj0@gmail.com"));
         } catch (ServiceException e) {
             e.printStackTrace();
             fail("Should not throw ServiceException");
         }
-    }
+    } 
 
     @Test
     void testUpdateMilestone() {
@@ -91,16 +92,15 @@ public class TestMilestoneService {
     private class FakeMilestoneDAO extends MilestoneDAO {
         private List<Milestone> milestones = new ArrayList<>();
 
-        @Override
-        public boolean insertMilestone(Milestone milestone) {
-            milestones.add(milestone);
+        public boolean insertMilestone(milestone, 82L,"jayaprakashj0@gmail.com") {
+            milestones.add(milestone, 82L,"jayaprakashj0@gmail.com");
             return true;
         }
 
         @Override
         public boolean updateMilestone(Milestone milestone) {
             return true;
-        }
+        } 
 
         @Override
         public Milestone getMilestoneById(int milestoneId) {

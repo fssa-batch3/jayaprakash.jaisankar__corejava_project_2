@@ -32,7 +32,7 @@ public class TestTaskValidator {
 
         assertThrows(ValidationException.class, () -> TaskValidator.validateTask(invalidTaskName));
     }
-    
+     
     @Test
     public void testInvalidTaskNameNull() {
         Task invalidTaskNameNull = new Task(21, null, "Task details", "Category",

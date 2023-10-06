@@ -3,6 +3,7 @@ package com.fssa.projectprovision.service;
 
 
 import com.fssa.projectprovision.dao.PersonalTaskDAO;
+
 import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 import com.fssa.projectprovision.model.PersonalTask;
@@ -16,7 +17,7 @@ public class PersonalTaskService {
 
     public PersonalTaskService(PersonalTaskDAO personalTaskDAO) {
         this.personalTaskDAO = personalTaskDAO;
-    }
+    } 
 
     public boolean createPersonalTask(PersonalTask task) throws ServiceException {
         try {

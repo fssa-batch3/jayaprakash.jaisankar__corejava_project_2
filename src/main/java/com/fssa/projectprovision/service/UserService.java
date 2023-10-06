@@ -3,6 +3,7 @@ package com.fssa.projectprovision.service;
 import com.fssa.projectprovision.dao.*;
 import com.fssa.projectprovision.exception.*;
 import com.fssa.projectprovision.model.*;
+import com.fssa.projectprovision.utils.Passwordutil;
 import com.fssa.projectprovision.validation.*;
 
 import java.util.List;
@@ -39,7 +40,11 @@ public class UserService {
             if (existingUser != null && existingUser.isActive()) {
                 throw new ServiceException("Email id " + user.getEmail() + " is already registered");
             }
-             
+
+            // Hash the user's password before storing it
+            String hashedPassword = Passwordutil.hashPassword(user.getPassword());
+            user.setPassword(hashedPassword);
+
             if (UserDAO.createUser(user)) {
                 return "Registration Successful";
             } else {
@@ -48,10 +53,9 @@ public class UserService {
         } catch (ValidationException e) {
             throw new ServiceException("Invalid User", e);
         } catch (DAOException e) {
-            throw new ServiceException("Database Error", e); // Adjusted error message
+            throw new ServiceException("Database Error", e);
         }
     }
-
     
 
     /**
@@ -71,19 +75,18 @@ public class UserService {
                 throw new ValidationException("Invalid Email");
             }
             User fromDb = UserDAO.getUserByEmail(user.getEmail());
-            if (fromDb != null && user.getPassword().equals(fromDb.getPassword())) {
+            if (fromDb != null && Passwordutil.checkPassword(user.getPassword(), fromDb.getPassword())) {
                 // Fetch the taskAssignee from the database and set it in the User object
                 String taskAssignee = UserDAO.getTaskAssigneeByEmail(user.getEmail());
                 fromDb.setTaskAssignee(taskAssignee);
                 return fromDb;
             } else {
                 throw new ServiceException("User Not Found");
-            } 
+            }
         } catch (ValidationException e) {
             throw new ServiceException(e);
-        }
-        catch (DAOException e) {
-            throw new ServiceException("Database Error", e); // Adjusted error message
+        } catch (DAOException e) {
+            throw new ServiceException("Database Error", e);
         }
     }
 
@@ -162,6 +165,18 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    
+
+    public boolean deleteUser(long userId) {
+        try {
+            return UserDAO.deleteUserById(userId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+
     /**
      * Retrieves a user by their user ID.
      *

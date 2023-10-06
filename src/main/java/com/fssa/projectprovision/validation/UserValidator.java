@@ -254,9 +254,7 @@ public class UserValidator {
      * @return A BooleanSupplier object (implemenatation not provided).
      */
 
-	public BooleanSupplier validateId(int validId) {
-		return null;
-	}
+	
 
 }
 

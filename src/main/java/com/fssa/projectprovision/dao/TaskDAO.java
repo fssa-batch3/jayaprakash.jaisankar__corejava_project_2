@@ -1,6 +1,7 @@
 package com.fssa.projectprovision.dao;
 
 import com.fssa.projectprovision.exception.DAOException;
+
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
@@ -26,7 +27,7 @@ import java.util.List;
  *
  */
 public class TaskDAO {
-
+ 
 	
 	/**
 	 * The TaskDAO class provides methods for accessing and manipulating task data in the database.
@@ -57,7 +58,7 @@ public class TaskDAO {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
-
+ 
             pst.setString(1, task.getTaskName());
             pst.setString(2, task.getTaskDetails());
             pst.setString(3, task.getTaskCategory());
@@ -165,7 +166,7 @@ public class TaskDAO {
     
     /**
      * Updates an existing task in the database.
-     *
+     * 
      * @param task The Task object containing the updated task information.
      * @return True if the task update was successful, false otherwise.
      * @throws DAOException If there's an issue with the database operation.
@@ -278,7 +279,7 @@ public class TaskDAO {
                     taskList.add(task);
                 }
             }
-
+ 
         } catch (SQLException e) {
             throw new DAOException(e);
         }

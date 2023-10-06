@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
  * // Validation checks will be performed for various attributes
  * 
  * @author JayaprakashJaisankar
- *
- */
+ * 
+ */ 
 public class TaskValidator {
 
     private static final String VALID_TASK_NAME_PATTERN = "^[a-zA-Z0-9\\s]+$";
@@ -200,10 +200,8 @@ public class TaskValidator {
         if (!Pattern.matches(VALID_TAGS_PATTERN, taskTags)) {
             throw new ValidationException("Invalid task tags format");
         }
-    } 
-
-     
-    /**
+    }      
+    /** 
      * Validates the  ID.
      * 
      * @param  The  ID to validate.
