@@ -40,14 +40,14 @@ public class TestPersonalTaskDAO {
     @Test
     void testGetPersonalTaskById() throws DAOException {
         PersonalTaskDAO personalTaskDAO = new PersonalTaskDAO();
-        PersonalTask task = personalTaskDAO.getPersonalTaskById(8);
+        PersonalTask task = personalTaskDAO.getPersonalTaskById1(8);
         assertNotNull(task);
     }
 
     @Test
     void testUpdatePersonalTask() throws DAOException {
         PersonalTaskDAO personalTaskDAO = new PersonalTaskDAO();
-        PersonalTask task = personalTaskDAO.getPersonalTaskById(1695029147846L);
+        PersonalTask task = personalTaskDAO.getPersonalTaskById1(1695029147846L);
         assertNotNull(task);
         task.setTaskName("Updated Task Name");
         task.setUserId(1695029147846L);
@@ -56,7 +56,7 @@ public class TestPersonalTaskDAO {
         task.setTaskTime(LocalTime.now());
         assertTrue(personalTaskDAO.updatePersonalTask(task));
 
-        PersonalTask updatedTask = personalTaskDAO.getPersonalTaskById(8);
+        PersonalTask updatedTask = personalTaskDAO.getPersonalTaskById1(8);
         assertNotNull(updatedTask);
         assertEquals("Updated Task Name", updatedTask.getTaskName());
     }
@@ -67,7 +67,7 @@ public class TestPersonalTaskDAO {
         boolean result = personalTaskDAO.deletePersonalTask(3);
         assertTrue(result);
 
-        PersonalTask task = personalTaskDAO.getPersonalTaskById(8);
+        PersonalTask task = personalTaskDAO.getPersonalTaskById1(8);
         assertNull(task);
     }
 

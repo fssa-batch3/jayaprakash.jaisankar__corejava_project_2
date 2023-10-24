@@ -18,10 +18,7 @@ public class CalendarService {
     public boolean addCalendarEntry(CalendarEntry entry) {
         return calendarDAO.insertCalendarEntry(entry);
     }
-//
-//    public CalendarEntry getCalendarEntryById(int id) {
-//        return calendarDAO.getCalendarEntryById(id);
-//    }
+
 
     public List<CalendarEntry> getCalendarEntriesByUserId(long userId) {
         return calendarDAO.getCalendarEntriesByUserId(userId);

@@ -30,7 +30,7 @@ public class TestDAOException {
         assertEquals(cause, daoException.getCause());
     }
 
-    @Test 
+    @Test  
     public void testConstructorWithThrowable() {
         Throwable cause = new RuntimeException("Test Cause");
         DAOException daoException = new DAOException(cause);

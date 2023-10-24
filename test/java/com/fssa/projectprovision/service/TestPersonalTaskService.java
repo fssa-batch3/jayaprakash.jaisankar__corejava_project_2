@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class TestPersonalTaskService {
@@ -71,14 +72,20 @@ public class TestPersonalTaskService {
         long userId = 1695029147846L;
 
         try {
-            PersonalTask fetchedTask = personalTaskService.getPersonalTaskById(userId);
-            assertNotNull(fetchedTask);
-            assertEquals(userId, fetchedTask.getUserId());
+            List<PersonalTask> fetchedTasks = personalTaskService.getPersonalTasksByUserId(userId);
+            assertNotNull(fetchedTasks);            
+            if (!fetchedTasks.isEmpty()) {
+                PersonalTask fetchedTask = fetchedTasks.get(0); 
+                assertEquals(userId, fetchedTask.getUserId());
+            } else {
+                fail("No tasks found for the given user");
+            }
         } catch (ServiceException e) {
             e.printStackTrace();
-            fail("Should not throw ServiceException");
+            fail("Should not throw ServiceException: " + e.getMessage());
         }
     }
+
 
     @Order(4)
     @Test

@@ -48,7 +48,7 @@ public class CalendarDAO {
         }
         return calendarEntries;
     }
-
+ 
     private CalendarEntry buildCalendarEntryFromResultSet(ResultSet rs) throws SQLException {
         CalendarEntry entry = new CalendarEntry();
         entry.setId(rs.getInt("id"));

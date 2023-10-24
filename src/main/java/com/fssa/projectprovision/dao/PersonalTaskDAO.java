@@ -88,8 +88,6 @@ public class PersonalTaskDAO {
                 if (rs.next()) {
                     return buildPersonalTaskFromResultSet(rs);
                 } else {
-                    // Task not found, you might return null or throw an exception
-                    // depending on your application's logic
                     return null;
                 }
             }
