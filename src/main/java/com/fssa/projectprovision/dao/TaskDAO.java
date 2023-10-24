@@ -2,6 +2,7 @@ package com.fssa.projectprovision.dao;
 
 import com.fssa.projectprovision.exception.DAOException;
 
+
 import com.fssa.projectprovision.model.Task;
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
@@ -238,6 +239,28 @@ public class TaskDAO {
             return tasks;
         } catch (SQLException e) {
             throw new DAOException("Error while retrieving tasks for user", e);
+        }
+    }
+
+    public List<Task> getTasksForUserWithPagination(Long userId, String taskAssignee, int pageNumber, int pageSize) throws DAOException {
+        int offset = (pageNumber - 1) * pageSize;
+        String query = "SELECT * FROM tasks WHERE (user_id = ? OR taskassignee = ?) LIMIT ? OFFSET ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setLong(1, userId);
+            pst.setString(2, taskAssignee);
+            pst.setInt(3, pageSize);
+            pst.setInt(4, offset);
+
+            ResultSet rs = pst.executeQuery();
+            List<Task> tasks = new ArrayList<>();
+            while (rs.next()) {
+                Task task = buildTaskFromResultSet(rs);
+                tasks.add(task);
+            }
+            return tasks;
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 

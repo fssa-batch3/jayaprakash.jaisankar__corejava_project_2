@@ -34,12 +34,11 @@ public class PersonalTaskService {
             throw new ServiceException("Failed to retrieve personal tasks", e);
         }
     }
-
-    public PersonalTask getPersonalTaskById(long userId) throws ServiceException {
+    public List<PersonalTask> getPersonalTasksByUserId(long userId) throws ServiceException {
         try {
-            return personalTaskDAO.getPersonalTaskById(userId);
+            return personalTaskDAO.getPersonalTasksByUserId(userId);
         } catch (DAOException e) {
-            throw new ServiceException("Failed to retrieve personal task", e);
+            throw new ServiceException("Failed to retrieve personal tasks", e);
         }
     }
 

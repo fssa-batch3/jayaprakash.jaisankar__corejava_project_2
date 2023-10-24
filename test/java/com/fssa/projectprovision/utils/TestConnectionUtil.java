@@ -19,7 +19,7 @@ public class TestConnectionUtil {
     private String originalDbUrl;
     private String originalDbUser;
     private String originalDbPassword;
-
+ 
     @Before 
     public void setUp() throws Exception {
         originalDbUrl = System.getenv("DB_URL");
@@ -67,6 +67,23 @@ public class TestConnectionUtil {
         field.setAccessible(true);
         @SuppressWarnings("unchecked")
         java.util.Map<String, String> map = (java.util.Map<String, String>) field.get(env);
-        map.put(key, value);
+        map.put(key, value); 
+    }
+    
+    @Test
+    public void testGetConnectionSuccess() {
+        Connection connection = ConnectionUtil.getConnection();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetConnectionWithClassNotFoundException() {
+        System.setProperty("jdbc.drivers", "com.example.DoesNotExistDriver");
+        Connection connection = ConnectionUtil.getConnection();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetConnectionWithSQLException() {
+        DriverManager.setLogWriter(null); 
+        Connection connection = ConnectionUtil.getConnection();
     }
 }

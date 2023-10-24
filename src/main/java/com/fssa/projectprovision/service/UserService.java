@@ -1,6 +1,7 @@
 package com.fssa.projectprovision.service;
 
 import com.fssa.projectprovision.dao.*;
+
 import com.fssa.projectprovision.exception.*;
 import com.fssa.projectprovision.model.*;
 import com.fssa.projectprovision.utils.Passwordutil;
@@ -76,7 +77,6 @@ public class UserService {
             }
             User fromDb = UserDAO.getUserByEmail(user.getEmail());
             if (fromDb != null && Passwordutil.checkPassword(user.getPassword(), fromDb.getPassword())) {
-                // Fetch the taskAssignee from the database and set it in the User object
                 String taskAssignee = UserDAO.getTaskAssigneeByEmail(user.getEmail());
                 fromDb.setTaskAssignee(taskAssignee);
                 return fromDb;

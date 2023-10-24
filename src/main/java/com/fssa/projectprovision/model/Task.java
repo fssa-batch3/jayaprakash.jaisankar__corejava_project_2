@@ -70,7 +70,7 @@ public class Task {
 
     public Task(int i, String string, String string2, String string3, Date valueOf, String string4, String string5,
 			String string6, String string7, String string8, String string9) {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public int getId() {
@@ -87,7 +87,7 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-    }
+    } 
 
     public String getTaskDetails() {
         return taskDetails;

@@ -4,6 +4,7 @@ import com.fssa.projectprovision.model.Milestone;
 
 
 
+
 import com.fssa.projectprovision.utils.ConnectionUtil;
 
 import java.sql.*;
@@ -38,7 +39,7 @@ public class MilestoneDAO {
      * Retrieves a list of Project Tasks with associated Milestones from the database.
      *
      * @return A list of Milestone objects representing Project Tasks with Milestones.
-     */
+     */ 
 
     public static List<Milestone> getProjectTasksWithMilestones() {
         List<Milestone> projectTasks = new ArrayList<>();

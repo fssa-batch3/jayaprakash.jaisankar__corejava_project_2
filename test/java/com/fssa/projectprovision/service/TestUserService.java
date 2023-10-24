@@ -1,8 +1,15 @@
 package com.fssa.projectprovision.service;
 
+import com.fssa.projectprovision.dao.UserDAO;
+import com.fssa.projectprovision.exception.DAOException;
 import com.fssa.projectprovision.exception.ServiceException;
 
+
+
 import com.fssa.projectprovision.model.User;
+import com.fssa.projectprovision.utils.*;
+
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -23,36 +30,57 @@ class TestUserService {
     public void setUp() {
         userService = new UserService();
         user = new User("Jayaprakash", "M", "1234567890", LocalDate.parse("2002-06-28"),
-                        "Sample Address", "About Me", "sachinjztp@example.com", "password123",
+                        "Sample Address", "About Me", "sachiny1@example.com", "password123",
                         "http://www.example.com/index.html", "{}", 1, false);
     }
-
+ 
     @Order(1)
     @Test
     void testValidRegisterUser() {
         try {
+            String originalPassword = user.getPassword();
+            String hashedPassword = Passwordutil.hashPassword(originalPassword);
+            user.setPassword(hashedPassword);
+
             String result = userService.registerUser(user);
             assertEquals("Registration Successful", result);
+
+            User retrievedUser = UserDAO.getUserByEmail(user.getEmail());
+            assertNotNull(retrievedUser);
+            assertTrue(Passwordutil.checkPassword(originalPassword, retrievedUser.getPassword()));
+
         } catch (ServiceException e) {
             fail("Should not throw ServiceException");
-        }
+        } catch (DAOException e) {
+			e.printStackTrace();
+		}
     }
 
-   
 
     @Order(2)
     @Test
     void testValidLogin() {
         try {
+            String originalPassword = user.getPassword();
+            String hashedPassword = Passwordutil.hashPassword(originalPassword);
+            user.setPassword(hashedPassword);
+            userService.registerUser(user);
+
             User loggedInUser = userService.loginUser(user);
+
             assertNotNull(loggedInUser);
+
             assertEquals(user.getEmail(), loggedInUser.getEmail());
+            assertEquals(user.getName(), loggedInUser.getName());
+
+            assertTrue(Passwordutil.checkPassword(originalPassword, loggedInUser.getPassword()));
+
         } catch (ServiceException e) {
             fail("Should not throw ServiceException");
         }
     }
 
-    @Test
+    @Test 
     @Order(3)
     void testInvalidLogin() {
         User nonExistentUser = new User("Nonexistent", "M", "9876543210", LocalDate.now(),

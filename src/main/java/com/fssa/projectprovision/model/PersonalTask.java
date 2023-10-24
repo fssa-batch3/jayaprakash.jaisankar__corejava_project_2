@@ -1,6 +1,7 @@
 package com.fssa.projectprovision.model;
 
 import java.time.LocalDate;
+
 import java.time.LocalTime;
 
 public class PersonalTask {
@@ -12,9 +13,18 @@ public class PersonalTask {
     private LocalDate taskDate;
     private LocalTime taskTime;
 
-    public PersonalTask() {
+    public PersonalTask(int taskId, long userId, String taskName, boolean remainder, LocalDate taskDate, LocalTime taskTime) {
+        this.taskId = taskId;
+        this.userId = userId;
+        this.taskName = taskName;
+        this.remainder = remainder;
+        this.taskDate = taskDate;
+        this.taskTime = taskTime;
     }
 
+    public PersonalTask() {
+    }
+ 
     public int getTaskId() {
         return taskId;
     }

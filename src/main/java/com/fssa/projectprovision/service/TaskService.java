@@ -86,6 +86,14 @@ public class TaskService {
     }
 
 
+    public List<Task> getTasksForUserWithPagination(Long userId, String taskAssignee, int pageNumber, int pageSize) throws ServiceException {
+        try {
+            return taskDAO.getTasksForUserWithPagination(userId, taskAssignee, pageNumber, pageSize);
+        } catch (DAOException e) {
+            throw new ServiceException("Failed to retrieve paginated tasks for user", e);
+        }
+    }
+
     
     /**
      * Retrieves a task by its ID.

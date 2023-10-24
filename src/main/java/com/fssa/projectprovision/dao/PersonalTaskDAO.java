@@ -57,8 +57,8 @@ public class PersonalTaskDAO {
         return taskList;
     }
 
-    public PersonalTask getPersonalTaskById(long userId) throws DAOException {
-        PersonalTask task = null;
+    public List<PersonalTask> getPersonalTaskById(long userId) throws DAOException {
+    	 List<PersonalTask> taskList = new ArrayList<>();
         String query = "SELECT * FROM personaltask WHERE user_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
@@ -67,16 +67,38 @@ public class PersonalTaskDAO {
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    task = buildPersonalTaskFromResultSet(rs);
+                	 PersonalTask task = buildPersonalTaskFromResultSet(rs);
+                     taskList.add(task);
                 }
             }
 
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-        return task;
+        return taskList;
+    }
+    public PersonalTask getPersonalTaskById1(long taskId) throws DAOException {
+        String query = "SELECT * FROM personaltask WHERE task_id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pst = connection.prepareStatement(query)) {
+
+            pst.setLong(1, taskId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return buildPersonalTaskFromResultSet(rs);
+                } else {
+                    // Task not found, you might return null or throw an exception
+                    // depending on your application's logic
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
+    
     public boolean updatePersonalTask(PersonalTask task) throws DAOException {
         String query = "UPDATE personaltask SET " +
                 "user_id = ?, task_name = ?, remainder = ?, task_date = ?, task_time = ? " +
