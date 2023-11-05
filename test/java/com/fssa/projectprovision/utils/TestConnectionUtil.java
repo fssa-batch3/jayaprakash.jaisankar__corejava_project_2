@@ -1,38 +1,44 @@
 package com.fssa.projectprovision.utils;
 
-import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.*;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException; 
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestConnectionUtil {
 
     private String originalDbUrl;
     private String originalDbUser;
     private String originalDbPassword;
- 
-    @Before 
-    public void setUp() throws Exception {
-        originalDbUrl = System.getenv("DB_URL");
-        originalDbUser = System.getenv("DB_USER");
-        originalDbPassword = System.getenv("DB_PASSWORD");
 
+    @BeforeAll
+    public static void setupEnv() {
         setEnv("DB_URL", "jdbc:mysql://localhost:3306/test_db");
         setEnv("DB_USER", "test_user");
         setEnv("DB_PASSWORD", "test_password");
     }
- 
-    @After
-    public void tearDown() throws Exception {
+
+    @AfterAll
+    public static void restoreEnv() {
+        setEnv("DB_URL", null);
+        setEnv("DB_USER", null);
+        setEnv("DB_PASSWORD", null);
+    }
+
+    @BeforeEach
+    public void setUp() {
+        originalDbUrl = System.getenv("DB_URL");
+        originalDbUser = System.getenv("DB_USER");
+        originalDbPassword = System.getenv("DB_PASSWORD");
+    }
+
+    @AfterEach
+    public void tearDown() {
         setEnv("DB_URL", originalDbUrl);
         setEnv("DB_USER", originalDbUser);
         setEnv("DB_PASSWORD", originalDbPassword);
@@ -44,46 +50,54 @@ public class TestConnectionUtil {
         assertNotNull(System.getenv("DB_USER"));
         assertNotNull(System.getenv("DB_PASSWORD"));
 
-        Connection connection = ConnectionUtil.getConnection();
-
-        assertNotNull(connection);
-        assertTrue(connection instanceof Connection);
-        try {
-            connection.close();
-        } catch (SQLException e) {
-           System.out.println(e);
-        }
-    } 
-
-    private static void setEnv(String key, String value) throws Exception {
-        Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
-        Field theCaseInsensitiveEnvironmentField = processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment");
-        theCaseInsensitiveEnvironmentField.setAccessible(true);
-
-        @SuppressWarnings("unchecked")
-        Object env = theCaseInsensitiveEnvironmentField.get(null);
-
-        Field field = env.getClass().getDeclaredField("m");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        java.util.Map<String, String> map = (java.util.Map<String, String>) field.get(env);
-        map.put(key, value); 
+        assertDoesNotThrow(() -> {
+            try (Connection connection = ConnectionUtil.getConnection()) {
+                assertNotNull(connection);
+                assertTrue(connection instanceof Connection);
+            }
+        });
     }
-    
+
     @Test
     public void testGetConnectionSuccess() {
-        Connection connection = ConnectionUtil.getConnection();
+        assertDoesNotThrow(() -> {
+            try (Connection connection = ConnectionUtil.getConnection()) {
+                assertNotNull(connection);
+            }
+        });
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testGetConnectionWithClassNotFoundException() {
-        System.setProperty("jdbc.drivers", "com.example.DoesNotExistDriver");
-        Connection connection = ConnectionUtil.getConnection();
+        System.setProperty("jdbc:mysql://localhost:3306/jayaprakash_jaisankar_corejava_project", "com.fssa.projectprovision");
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ConnectionUtil.getConnection());
+        assertTrue(exception.getCause() instanceof ClassNotFoundException);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testGetConnectionWithSQLException() {
-        DriverManager.setLogWriter(null); 
-        Connection connection = ConnectionUtil.getConnection();
+        DriverManager.setLogWriter(null);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ConnectionUtil.getConnection());
+        assertTrue(exception.getCause() instanceof SQLException);
+    }
+
+
+    private static void setEnv(String key, String value) {
+        try {
+            Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
+            Field theCaseInsensitiveEnvironmentField = processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment");
+            theCaseInsensitiveEnvironmentField.setAccessible(true);
+
+            @SuppressWarnings("unchecked")
+            Object env = theCaseInsensitiveEnvironmentField.get(null);
+
+            Field field = env.getClass().getDeclaredField("m");
+            field.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            java.util.Map<String, String> map = (java.util.Map<String, String>) field.get(env);
+            map.put(key, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

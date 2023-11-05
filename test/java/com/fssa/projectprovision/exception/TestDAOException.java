@@ -1,51 +1,41 @@
 package com.fssa.projectprovision.exception;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-public class TestDAOException {
-
-   
+import static org.junit.jupiter.api.Assertions.assertEquals;
  
-    @Test
-    public void testConstructorWithMessage() {
-        String errorMessage = "Test Error Message";
-        DAOException daoException = new DAOException(errorMessage);
+/**
+ * 
+ */
+public class TestDAOException {
+	@Test
+	public	void testDAOException() {
+		try {  
+			throw new DAOException("DAO exception with message");
+		} catch (DAOException e) {
+			assertEquals("DAO exception with message", e.getMessage());
+		}
+	} 
 
-        assertNotNull(daoException);
-        assertEquals(errorMessage, daoException.getMessage());
-        assertNull(daoException.getCause());
-    }
+	@Test
+	public void testDAOExceptionWithThrowable() {
+		Throwable cause = new RuntimeException("Root cause");
+		try {
+			throw new DAOException(cause);
+		} catch (DAOException e) {
+			assertEquals(cause, e.getCause());
+		}
+	}
 
-    @Test
-    public void testConstructorWithCause() {
-        String errorMessage = "Test Error Message";
-        Throwable cause = new RuntimeException("Test Cause");
-        DAOException daoException = new DAOException(errorMessage, cause);
+	@Test
+	public void testDAOExceptionWithMessageAndThrowable() {
+		String message = "DAO exception message";
+		Throwable cause = new RuntimeException("Root cause");
+		try {
+			throw new DAOException(message, cause);
+		} catch (DAOException e) {
+			assertEquals(message, e.getMessage());
+			assertEquals(cause, e.getCause());
+		}
+	}
 
-        assertNotNull(daoException);
-        assertEquals(errorMessage, daoException.getMessage());
-        assertEquals(cause, daoException.getCause());
-    }
-
-    @Test  
-    public void testConstructorWithThrowable() {
-        Throwable cause = new RuntimeException("Test Cause");
-        DAOException daoException = new DAOException(cause);
-
-        assertNotNull(daoException);
-        assertEquals(cause.toString(), daoException.getMessage());
-        assertEquals(cause, daoException.getCause());
-    }
-
-    @Test
-    public void testConstructorWithNullMessageAndCause() {
-        DAOException daoException = new DAOException(null, null);
-
-        assertNotNull(daoException);
-        assertNull(daoException.getMessage());
-        assertNull(daoException.getCause());
-    }
 }

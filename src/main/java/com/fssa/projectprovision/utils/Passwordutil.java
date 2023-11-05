@@ -11,8 +11,8 @@ public class Passwordutil {
 	 * Private constructor to prevent instantiation.
 	 */
 	private Passwordutil() {
-		// Do nothing (empty constructor)
-	}
+		
+	} 
 
 	/**
 	 * Hashes a plain password using BCrypt.

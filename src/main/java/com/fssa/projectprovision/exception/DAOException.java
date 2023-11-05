@@ -26,7 +26,7 @@ public class DAOException extends Exception {
 	 */
 	public DAOException(String msg) {
 		super(msg);
-	} 
+	}  
 
 	/**
 	 * Constructs a new DAOException with the specified cause.

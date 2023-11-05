@@ -1,6 +1,7 @@
 	package com.fssa.projectprovision.dao;
 	
 	import com.fssa.projectprovision.exception.DAOException;
+
 	import com.fssa.projectprovision.model.User;
 	import com.fssa.projectprovision.utils.ConnectionUtil;
 	

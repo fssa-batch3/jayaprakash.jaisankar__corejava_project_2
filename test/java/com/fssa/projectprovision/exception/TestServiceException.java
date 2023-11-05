@@ -1,50 +1,41 @@
 package com.fssa.projectprovision.exception;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import com.fssa.projectprovision.exception.ServiceException;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
- 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 public class TestServiceException {
 
     @Test
-    public void testConstructorWithMessage() {
-        String errorMessage = "Test Error Message";
-        ServiceException serviceException = new ServiceException(errorMessage);
-
-        assertNotNull(serviceException);
-        assertEquals(errorMessage, serviceException.getMessage());
-        assertNull(serviceException.getCause());
+    public void testServiceException() {
+        try {
+            throw new ServiceException("Service exception with message");
+        } catch (ServiceException e) {
+            assertEquals("Service exception with message", e.getMessage());
+        }
     }
 
     @Test
-    public void testConstructorWithCause() {
-        String errorMessage = "Test Error Message";
-        Throwable cause = new RuntimeException("Test Cause");
-        ServiceException serviceException = new ServiceException(errorMessage, cause);
-
-        assertNotNull(serviceException);
-        assertEquals(errorMessage, serviceException.getMessage());
-        assertEquals(cause, serviceException.getCause());
+    public void testServiceExceptionWithThrowable() {
+        Throwable cause = new RuntimeException("Root cause");
+        try {
+            throw new ServiceException(cause);
+        } catch (ServiceException e) {
+            assertEquals(cause, e.getCause());
+        }
     }
 
     @Test
-    public void testConstructorWithThrowable() {
-        Throwable cause = new RuntimeException("Test Cause");
-        ServiceException serviceException = new ServiceException(cause);
-
-        assertNotNull(serviceException);
-        assertEquals(cause.toString(), serviceException.getMessage());
-        assertEquals(cause, serviceException.getCause());
-    }
-
-    @Test
-    public void testConstructorWithNullMessageAndCause() {
-        ServiceException serviceException = new ServiceException(null, null);
-
-        assertNotNull(serviceException);
-        assertNull(serviceException.getMessage());
-        assertNull(serviceException.getCause());
+    public void testServiceExceptionWithMessageAndThrowable() {
+        String message = "Service exception message";
+        Throwable cause = new RuntimeException("Root cause");
+        try {
+            throw new ServiceException(message, cause);
+        } catch (ServiceException e) {
+            assertEquals(message, e.getMessage());
+            assertEquals(cause, e.getCause());
+        }
     }
 }

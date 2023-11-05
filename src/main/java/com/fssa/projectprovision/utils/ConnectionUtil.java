@@ -1,6 +1,7 @@
  package com.fssa.projectprovision.utils;
 
 import java.sql.Connection;
+import com.fssa.projectprovision.exception.DatabaseConnectionException;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -62,7 +63,7 @@ public class ConnectionUtil {
         final String dbUrl = "jdbc:mysql://localhost:3306/jayaprakash_jaisankar_corejava_project";
         final String dbUser ="root";
         final String dbPassword = "123456";
-        
+         
         
 //      final String dbUrl = System.getenv("DB_URL");
 //      final String dbUser = System.getenv("DB_USER");

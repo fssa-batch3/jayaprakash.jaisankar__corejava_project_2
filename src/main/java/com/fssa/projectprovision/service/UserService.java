@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class UserService {
     private static final String USER_WITH_EMAIL = "User with email ";
-
+ 
     
     /**
      * Registers a new user in the system.
@@ -41,7 +41,7 @@ public class UserService {
             if (existingUser != null && existingUser.isActive()) {
                 throw new ServiceException("Email id " + user.getEmail() + " is already registered");
             }
-
+ 
             // Hash the user's password before storing it
             String hashedPassword = Passwordutil.hashPassword(user.getPassword());
             user.setPassword(hashedPassword);
@@ -56,7 +56,7 @@ public class UserService {
         } catch (DAOException e) {
             throw new ServiceException("Database Error", e);
         }
-    }
+    } 
     
 
     /**

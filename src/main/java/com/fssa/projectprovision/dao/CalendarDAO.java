@@ -1,7 +1,10 @@
 package com.fssa.projectprovision.dao;
 
 import com.fssa.projectprovision.model.CalendarEntry;
+
+
 import com.fssa.projectprovision.utils.ConnectionUtil;
+import com.fssa.projectprovision.exception.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 
 public class CalendarDAO {
 
-    public boolean insertCalendarEntry(CalendarEntry entry) {
+    public boolean insertCalendarEntry(CalendarEntry entry)  {
         String query = "INSERT INTO calender (url, userid) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pst = connection.prepareStatement(query)) {
@@ -23,9 +26,10 @@ public class CalendarDAO {
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) {
             handleSQLException(e);
-            return false;
+            return false; 
         }
     }
 
@@ -48,7 +52,7 @@ public class CalendarDAO {
         }
         return calendarEntries;
     }
- 
+  
     private CalendarEntry buildCalendarEntryFromResultSet(ResultSet rs) throws SQLException {
         CalendarEntry entry = new CalendarEntry();
         entry.setId(rs.getInt("id"));
